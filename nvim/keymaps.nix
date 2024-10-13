@@ -1,4 +1,9 @@
 {
+  globals = {
+    mapleader = " ";
+    maplocalleader = " ";
+  };
+
   keymaps = [
     {
       action = "<cmd>nohlsearch<CR>";
