@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ./globals.nix
+  ];
+
   extraPackages = [ pkgs.ripgrep ];
 
   viAlias = true;
