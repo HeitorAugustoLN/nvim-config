@@ -7,6 +7,8 @@
 {
   imports = [
     ./globals.nix
+
+    ./plugins/catppuccin.nix
   ];
 
   extraPackages = [ pkgs.ripgrep ];
