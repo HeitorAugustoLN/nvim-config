@@ -7,6 +7,7 @@
 {
   imports = [
     ./globals.nix
+    ./options.nix
 
     ./plugins/catppuccin.nix
   ];

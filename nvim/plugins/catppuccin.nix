@@ -22,7 +22,6 @@
           light = "latte";
         };
         flavour = "auto";
-        show_end_of_buffer = true;
         transparent_background = false;
       };
     };
