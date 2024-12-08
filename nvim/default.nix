@@ -10,6 +10,7 @@
     ./options.nix
 
     ./plugins/catppuccin.nix
+    ./plugins/treesitter.nix
   ];
 
   extraPackages = [ pkgs.ripgrep ];
