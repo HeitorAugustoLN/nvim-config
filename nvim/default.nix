@@ -10,6 +10,7 @@
     ./options.nix
 
     ./plugins/catppuccin.nix
+    ./plugins/lz-n.nix
     ./plugins/oil.nix
     ./plugins/treesitter.nix
   ];
