@@ -14,6 +14,7 @@
         git-hooks.follows = "";
         hercules-ci-effects.follows = "";
         nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "";
       };
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
