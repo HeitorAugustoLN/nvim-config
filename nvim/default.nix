@@ -13,6 +13,8 @@
     ./plugins/lz-n.nix
     ./plugins/oil.nix
     ./plugins/treesitter.nix
+    ./plugins/web-devicons.nix
+    ./plugins/which-key.nix
   ];
 
   extraPackages = [ pkgs.ripgrep ];
