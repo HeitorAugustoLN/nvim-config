@@ -21,11 +21,7 @@
       };
 
       settings = {
-        background = {
-          dark = config.catppuccin.flavor;
-          light = "latte";
-        };
-        flavour = "auto";
+        flavour = config.catppuccin.flavor;
         transparent_background = false;
       };
     };
