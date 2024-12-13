@@ -97,16 +97,34 @@
         "treefmt-nix": []
       },
       "locked": {
-        "lastModified": 1733847310,
-        "narHash": "sha256-VHzWuZYK/m5OFXzAczrjnI7vH6knj0sfLnziRVDqgFE=",
-        "owner": "nix-community",
+        "lastModified": 1733959984,
+        "narHash": "sha256-S/gBL0PuaHpCglaRgvE8I4hI+cZzqGs4iSSk/Sq5SeY=",
+        "owner": "HeitorAugustoLN",
         "repo": "nixvim",
-        "rev": "b752606681ded3f69e99ed568c7075b3578dce48",
+        "rev": "249ce721c0818b67a4bcd120aa1f3d2dc3571e3c",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "HeitorAugustoLN",
+        "ref": "lint-migrate",
         "repo": "nixvim",
+        "type": "github"
+      }
+    },
+    "nvim-lint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733953367,
+        "narHash": "sha256-sRI8NqZWGyJSSBI2Yjwh+HPHB/VGqXchAomS9Omq4iQ=",
+        "owner": "HeitorAugustoLN",
+        "repo": "nvim-lint",
+        "rev": "94e87953ac1bb16df33bdf4a9baec3fc052a6de5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "HeitorAugustoLN",
+        "ref": "fix-703",
+        "repo": "nvim-lint",
         "type": "github"
       }
     },
@@ -115,7 +133,8 @@
         "flake-parts": "flake-parts",
         "neovim-nightly": "neovim-nightly",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "nvim-lint": "nvim-lint"
       }
     }
   },

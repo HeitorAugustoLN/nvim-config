@@ -16,11 +16,8 @@
     colorscheme = "catppuccin";
     colorschemes.catppuccin = {
       enable = true;
-      lazyLoad = {
-        enable = true;
-        settings = {
-          colorscheme = "catppuccin";
-        };
+      lazyLoad.settings = {
+        colorscheme = "catppuccin";
       };
 
       settings = {

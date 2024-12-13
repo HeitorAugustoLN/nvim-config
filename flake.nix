@@ -19,7 +19,8 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim = {
-      url = "github:nix-community/nixvim";
+      # url = "github:nix-community/nixvim";
+      url = "github:HeitorAugustoLN/nixvim/lint-migrate";
       inputs = {
         devshell.follows = "";
         flake-compat.follows = "";
@@ -31,6 +32,15 @@
         nuschtosSearch.follows = "";
         treefmt-nix.follows = "";
       };
+    };
+
+    /*
+      TODO: Remove this input when the following PR is merged: https://github.com/mfussenegger/nvim-lint/pull/704
+            And when the plugin gets updated in the nixpkgs repository.
+    */
+    nvim-lint = {
+      url = "github:HeitorAugustoLN/nvim-lint/fix-703";
+      flake = false;
     };
   };
 
