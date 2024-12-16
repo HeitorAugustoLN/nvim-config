@@ -12,9 +12,9 @@
     ./plugins/catppuccin.nix
     ./plugins/lint.nix
     ./plugins/lz-n.nix
+    ./plugins/mini.nix
     ./plugins/oil.nix
     ./plugins/treesitter.nix
-    ./plugins/web-devicons.nix
     ./plugins/which-key.nix
   ];
 

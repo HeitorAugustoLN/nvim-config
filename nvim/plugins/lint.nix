@@ -15,13 +15,11 @@ in
   plugins.lint = {
     enable = true;
     package = nvim-lint;
-    lazyLoad.settings = {
-      event = [
-        "BufNewFile"
-        "BufReadPost"
-        "BufWritePost"
-      ];
-    };
+    lazyLoad.settings.event = [
+      "BufNewFile"
+      "BufReadPost"
+      "BufWritePost"
+    ];
 
     autoCmd = {
       desc = "Lint on read, write, and insert leave";
