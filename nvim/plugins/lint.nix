@@ -40,7 +40,7 @@ in
       };
     };
 
-    linters_by_ft = {
+    lintersByFt = {
       nix = [
         "deadnix"
         "statix"
