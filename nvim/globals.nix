@@ -1,6 +1,8 @@
 { config, ... }:
 {
   globals = {
+    autoformat = true;
+
     loaded_node_provider = 0;
     loaded_perl_provider = 0;
     loaded_python_provider = 0;

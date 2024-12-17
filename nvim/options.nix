@@ -75,5 +75,8 @@
     // lib.optionalAttrs (builtins.elem pkgs.ripgrep config.extraPackages) {
       grepformat = "%f:%l:%c:%m";
       grepprg = "rg --vimgrep";
+    }
+    // lib.optionalAttrs config.plugins.conform-nvim.enable {
+      formatexpr = "v:lua.require'conform'.formatexpr()";
     };
 }

@@ -10,6 +10,7 @@
     ./options.nix
 
     ./plugins/catppuccin.nix
+    ./plugins/conform.nix
     ./plugins/lint.nix
     ./plugins/lz-n.nix
     ./plugins/mini.nix
