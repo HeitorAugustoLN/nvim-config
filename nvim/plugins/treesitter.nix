@@ -8,13 +8,13 @@
         "TSUpdate"
         "TSUpdateSync"
       ];
-      lazy.__raw = "vim.fn.argc(-1) == 0";
       event = [
         "BufNewFile"
         "BufReadPost"
         "BufWritePost"
         "DeferredUIEnter"
       ];
+      lazy.__raw = "vim.fn.argc(-1) == 0";
     };
 
     folding = true;

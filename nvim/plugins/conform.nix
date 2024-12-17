@@ -10,7 +10,7 @@
           __unkeyed-1 = "<leader>f";
           __unkeyed-2.__raw = ''
             function()
-              require("conform").format { async = true, lsp_format = "fallback" }
+              require("conform").format({ async = true, lsp_format = "fallback" })
             end
           '';
           mode = [
@@ -37,27 +37,21 @@
         nixfmt = {
           command = lib.getExe pkgs.nixfmt-rfc-style;
         };
-
         ruff_fix = {
           command = lib.getExe pkgs.ruff;
         };
-
         ruff_format = {
           command = lib.getExe pkgs.ruff;
         };
-
         ruff_organize_imports = {
           command = lib.getExe pkgs.ruff;
         };
-
         rustfmt = {
           command = lib.getExe pkgs.rustfmt;
         };
-
         squeeze_blanks = {
           command = lib.getExe' pkgs.coreutils "cat";
         };
-
         stylua = {
           command = lib.getExe pkgs.stylua;
         };

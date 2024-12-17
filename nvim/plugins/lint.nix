@@ -38,6 +38,9 @@ in
       statix = {
         cmd = lib.getExe pkgs.statix;
       };
+      ruff = {
+        cmd = lib.getExe pkgs.ruff;
+      };
     };
 
     lintersByFt = {
@@ -45,6 +48,7 @@ in
         "deadnix"
         "statix"
       ];
+      python = [ "ruff" ];
     };
   };
 

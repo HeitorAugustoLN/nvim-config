@@ -1,6 +1,14 @@
 {
   plugins.oil = {
     enable = true;
+    lazyLoad.settings = {
+      before.__raw = ''
+        function()
+          require("lz.n").trigger_load("mini.nvim")
+        end
+      '';
+      lazy = false;
+    };
 
     settings = {
       default_file_explorer = true;
