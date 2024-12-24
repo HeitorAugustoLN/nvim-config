@@ -1,20 +1,7 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  nvim-lint = pkgs.vimUtils.buildVimPlugin {
-    pname = "nvim-lint";
-    src = inputs.nvim-lint;
-    version = inputs.nvim-lint.lastModifiedDate;
-  };
-in
+{ lib, pkgs, ... }:
 {
   plugins.lint = {
     enable = true;
-    package = nvim-lint;
     lazyLoad.settings.event = [
       "BufNewFile"
       "BufReadPost"

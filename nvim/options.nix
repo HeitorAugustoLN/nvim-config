@@ -66,7 +66,7 @@
       termguicolors = true;
       timeoutlen = 300;
       title = true;
-      titlestring = "%m %{expand('%:p') == '' || expand('%:p') == expand('%:p:h') . '/' ? '' : fnamemodify(expand('%'), ':~:.') . ' - '} %{stridx(expand('%:p'), getcwd()) == 0 ? fnamemodify(getcwd(), ':t') . ' - ' : ''} %{mode() == 'n' ? 'NORMAL' : mode() == 'i' ? 'INSERT' : mode() == 'v' ? 'VISUAL' : mode() == 'V' ? 'VISUAL LINE' : mode() == 'R' ? 'REPLACE' : mode() == 's' ? 'SELECT' : mode() == 't' ? 'TERMINAL' : mode()} | Neovim";
+      titlestring = "%m %{expand('%:p') == '' || expand('%:p') == expand('%:p:h') . '/' ? '' : fnamemodify(expand('%'), ':~:.') . ' - '} %{stridx(expand('%:p'), getcwd()) == 0 ? fnamemodify(getcwd(), ':t') . ' - ' : ''} %{mode() == 'n' ? 'NORMAL' : mode() == 'i' ? 'INSERT' : mode() == 'v' ? 'VISUAL' : mode() == 'V' ? 'VISUAL LINE' : mode() == 'R' ? 'REPLACE' : mode() == 's' ? 'SELECT' : mode() == 't' ? 'TERMINAL' : mode() == 'c' ? 'COMMAND' : mode()} | Neovim";
       undofile = true;
       undolevels = 10000;
       updatetime = 200;
