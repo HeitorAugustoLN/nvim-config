@@ -20,7 +20,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim = {
       # url = "github:nix-community/nixvim";
-      url = "github:HeitorAugustoLN/nixvim/lint-migrate";
+      url = "github:HeitorAugustoLN/nixvim/lsp-migrate";
       inputs = {
         devshell.follows = "";
         flake-compat.follows = "";
