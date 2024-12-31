@@ -32,7 +32,9 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": []
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
       },
       "locked": {
         "lastModified": 1735605816,
@@ -94,7 +96,9 @@
           "nixpkgs"
         ],
         "nuschtosSearch": [],
-        "treefmt-nix": []
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
       },
       "locked": {
         "lastModified": 1735675781,
@@ -116,7 +120,28 @@
         "flake-parts": "flake-parts",
         "neovim-nightly": "neovim-nightly",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "treefmt-nix": "treefmt-nix"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735653038,
+        "narHash": "sha256-Q6xAmciTXDtZfUxf6c15QqtRR8BvX4edYPstF/uoqMk=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "56c0ecd79f7ba01a0ec027da015df751d6ca3ae7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     }
   },

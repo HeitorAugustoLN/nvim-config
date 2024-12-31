@@ -6,6 +6,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
@@ -14,10 +15,12 @@
         git-hooks.follows = "";
         hercules-ci-effects.follows = "";
         nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "";
+        treefmt-nix.follows = "treefmt-nix";
       };
     };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nixvim = {
       # url = "github:nix-community/nixvim";
       url = "github:HeitorAugustoLN/nixvim/lsp-migrate";
@@ -30,8 +33,13 @@
         nixpkgs.follows = "nixpkgs";
         nix-darwin.follows = "";
         nuschtosSearch.follows = "";
-        treefmt-nix.follows = "";
+        treefmt-nix.follows = "treefmt-nix";
       };
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -52,6 +60,8 @@
         "x86_64-linux"
       ];
 
+      imports = [ inputs.treefmt-nix.flakeModule ];
+
       perSystem =
         {
           inputs',
@@ -66,7 +76,7 @@
           nixvimModule = {
             module = import ./nvim;
             extraSpecialArgs = {
-              inherit inputs system;
+              inherit inputs inputs' system;
             };
           };
         in
@@ -76,40 +86,39 @@
             nvim = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
           };
 
-          devShells =
-            let
-              formatters = with pkgs; [
-                nixfmt-rfc-style
-                stylua
-              ];
-            in
-            {
-              default = self'.devShells.nvim;
-              nvim = pkgs.mkShell {
-                strictDeps = true;
+          devShells = {
+            default = self'.devShells.nvim;
+            nvim = pkgs.mkShell {
+              strictDeps = true;
 
-                nativeBuildInputs = [
-                  formatters
-                  self'.packages.nvim
-                ];
-              };
-              nvim-nightly = pkgs.mkShell {
-                strictDeps = true;
-
-                nativeBuildInputs = [
-                  formatters
-                  self'.packages.nvim-nightly
-                ];
-              };
+              nativeBuildInputs = [ self'.packages.nvim ];
             };
+            nvim-nightly = pkgs.mkShell {
+              strictDeps = true;
 
-          formatter = pkgs.treefmt;
+              nativeBuildInputs = [ self'.packages.nvim-nightly ];
+            };
+          };
 
           packages = {
             default = self'.packages.nvim;
             nvim = nixvim.makeNixvimWithModule nixvimModule;
             nvim-nightly = self'.packages.nvim.extend {
               package = inputs'.neovim-nightly.packages.neovim;
+            };
+          };
+
+          treefmt = {
+            flakeCheck = true;
+            projectRootFile = "flake.nix";
+
+            programs = {
+              deadnix.enable = true;
+              deno.enable = true; # For markdown
+              nixfmt.enable = true;
+              statix.enable = true;
+              stylua.enable = true;
+              taplo.enable = true;
             };
           };
         };

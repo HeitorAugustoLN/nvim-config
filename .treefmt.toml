@@ -1,7 +1,0 @@
-[formatter.nixfmt]
-command = "nixfmt"
-includes = ["*.nix"]
-
-[formatter.stylua]
-command = "stylua"
-includes = ["*.lua"]
