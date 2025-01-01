@@ -23,7 +23,7 @@
 
     nixvim = {
       # url = "github:nix-community/nixvim";
-      url = "github:HeitorAugustoLN/nixvim/lsp-migrate";
+      url = "github:HeitorAugustoLN/nixvim/lazydev";
       inputs = {
         devshell.follows = "";
         flake-compat.follows = "";

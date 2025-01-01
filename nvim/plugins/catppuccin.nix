@@ -20,6 +20,9 @@
 
       settings = {
         flavour = config.catppuccin.flavor;
+        integrations = {
+          blink_cmp = config.plugins.blink-cmp.enable;
+        };
         transparent_background = false;
       };
     };

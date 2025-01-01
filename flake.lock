@@ -878,16 +878,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1735675781,
-        "narHash": "sha256-q3A0s9B0n/xoOucNGs2ElNV3CDnEQuyQ4YjACRz/IO8=",
+        "lastModified": 1735681780,
+        "narHash": "sha256-jnuknMLpz4oRdW7eWk43XgH9zQkxxIqe5gm+eIxxFoQ=",
         "owner": "HeitorAugustoLN",
         "repo": "nixvim",
-        "rev": "923bdc1f2eb5777c9f61d8a63a818b4e35305d53",
+        "rev": "60980d837769373eb0fad6e93519cc0a430f732f",
         "type": "github"
       },
       "original": {
         "owner": "HeitorAugustoLN",
-        "ref": "lsp-migrate",
+        "ref": "lazydev",
         "repo": "nixvim",
         "type": "github"
       }
