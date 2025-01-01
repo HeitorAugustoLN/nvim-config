@@ -8,6 +8,7 @@
 {
   plugins.lsp = {
     enable = true;
+    inlayHints = true;
 
     servers = {
       lua_ls = {
