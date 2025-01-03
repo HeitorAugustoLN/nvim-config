@@ -2,17 +2,23 @@
   description = "HeitorAugustoLN's personal Neovim configuration made with Nixvim";
 
   inputs = {
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
-        flake-compat.follows = "";
+        flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
-        git-hooks.follows = "";
+        git-hooks.follows = "git-hooks";
         hercules-ci-effects.follows = "";
         nixpkgs.follows = "nixpkgs";
         treefmt-nix.follows = "treefmt-nix";
@@ -26,9 +32,9 @@
       url = "github:HeitorAugustoLN/nixvim/lazydev";
       inputs = {
         devshell.follows = "";
-        flake-compat.follows = "";
+        flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
-        git-hooks.follows = "";
+        git-hooks.follows = "git-hooks";
         home-manager.follows = "";
         nixpkgs.follows = "nixpkgs";
         nix-darwin.follows = "";
@@ -72,67 +78,6 @@
         "x86_64-linux"
       ];
 
-      imports = [ inputs.treefmt-nix.flakeModule ];
-
-      perSystem =
-        {
-          inputs',
-          pkgs,
-          self',
-          system,
-          ...
-        }:
-        let
-          nixvim = inputs.nixvim.legacyPackages.${system};
-          nixvimLib = inputs.nixvim.lib.${system};
-          nixvimModule = {
-            module = import ./nvim;
-            extraSpecialArgs = {
-              inherit inputs inputs' system;
-            };
-          };
-        in
-        {
-          checks = {
-            default = self'.checks.nvim;
-            nvim = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
-          };
-
-          devShells = {
-            default = self'.devShells.nvim;
-            nvim = pkgs.mkShell {
-              strictDeps = true;
-
-              nativeBuildInputs = [ self'.packages.nvim ];
-            };
-            nvim-nightly = pkgs.mkShell {
-              strictDeps = true;
-
-              nativeBuildInputs = [ self'.packages.nvim-nightly ];
-            };
-          };
-
-          packages = {
-            default = self'.packages.nvim;
-            nvim = nixvim.makeNixvimWithModule nixvimModule;
-            nvim-nightly = self'.packages.nvim.extend {
-              package = inputs'.neovim-nightly.packages.neovim;
-            };
-          };
-
-          treefmt = {
-            flakeCheck = true;
-            projectRootFile = "flake.nix";
-
-            programs = {
-              deadnix.enable = true;
-              deno.enable = true; # For markdown
-              nixfmt.enable = true;
-              statix.enable = true;
-              stylua.enable = true;
-              taplo.enable = true;
-            };
-          };
-        };
+      imports = [ ./flake ];
     };
 }
