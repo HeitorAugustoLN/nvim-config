@@ -1,7 +1,1 @@
-{ inputs', ... }:
-{
-  plugins.lz-n = {
-    enable = true;
-    package = inputs'.lz-n.packages.default;
-  };
-}
+{ plugins.lz-n.enable = true; }

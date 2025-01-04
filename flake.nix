@@ -25,7 +25,8 @@
       };
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:HeitorAugustoLN/nixpkgs/lz-n-update";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixvim = {
       # url = "github:nix-community/nixvim";
@@ -46,19 +47,6 @@
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # TODO: Remove this input after nvim-neorocks/lz.n#122 is merged
-    # And lz.n gets updated in nixpkgs.
-    #
-    # This PR makes setting `lazy = false` with other lazy handlers set up possible.
-    lz-n = {
-      url = "github:nvim-neorocks/lz.n";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        pre-commit-hooks.follows = "git-hooks";
-      };
     };
   };
 

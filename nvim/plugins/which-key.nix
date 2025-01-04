@@ -6,8 +6,6 @@
       event = "DeferredUIEnter";
     };
 
-    settings = {
-      preset = "helix";
-    };
+    settings.preset = "helix";
   };
 }
