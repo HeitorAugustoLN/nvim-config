@@ -53,10 +53,11 @@
     #
     # This PR makes setting `lazy = false` with other lazy handlers set up possible.
     lz-n = {
-      url = "github:zoriya/lz.n/master";
+      url = "github:nvim-neorocks/lz.n";
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+        pre-commit-hooks.follows = "git-hooks";
       };
     };
   };
