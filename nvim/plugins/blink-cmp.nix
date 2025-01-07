@@ -8,8 +8,6 @@
   plugins = {
     blink-cmp = {
       enable = true;
-      # HACK: Auto-load blink-cmp to get LSP capabilities until LSP isn't lazy-loadable
-      autoLoad = true;
       lazyLoad.settings = {
         before.__raw = ''
           function()

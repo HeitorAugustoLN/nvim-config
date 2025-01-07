@@ -9,6 +9,18 @@
   plugins.lsp = {
     enable = true;
     inlayHints = true;
+    lazyLoad.settings = {
+      before.__raw = ''
+        function()
+          require("lz.n").trigger_load("blink.cmp")
+        end
+      '';
+      event = [
+        "BufNewFile"
+        "BufReadPost"
+        "BufWritePost"
+      ];
+    };
 
     servers = {
       lua_ls = {
