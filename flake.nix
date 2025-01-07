@@ -3,7 +3,11 @@
 
   inputs = {
     flake-compat.url = "github:edolstra/flake-compat";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -25,8 +29,7 @@
       };
     };
 
-    nixpkgs.url = "github:HeitorAugustoLN/nixpkgs/lz-n-update";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixvim = {
       # url = "github:nix-community/nixvim";
