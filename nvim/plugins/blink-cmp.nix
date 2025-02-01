@@ -53,38 +53,16 @@
           window.border = "rounded";
         };
 
-        snippets = lib.optionalAttrs config.plugins.luasnip.enable {
-          active.__raw = ''
-            function(filter)
-              if filter and filter.direction then
-                return require("luasnip").jumpable(filter.direction)
-              end
-              return require("luasnip").in_snippet()
-            end
-          '';
-
-          jump.__raw = ''
-            function(direction)
-              require("luasnip").jump(direction)
-            end
-          '';
-
-          expand.__raw = ''
-            function(snippet)
-              require("luasnip").lsp_expand(snippet)
-            end
-          '';
-        };
+        snippets.preset = lib.mkIf config.plugins.luasnip.enable "luasnip";
 
         sources =
           let
-            default =
-              [
-                "lsp"
-                "path"
-              ]
-              ++ lib.optionals config.plugins.luasnip.enable [ "luasnip" ]
-              ++ [ "buffer" ];
+            default = [
+              "lsp"
+              "path"
+              "snippets"
+              "buffer"
+            ];
           in
           {
             inherit default;

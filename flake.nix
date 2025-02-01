@@ -29,13 +29,13 @@
       };
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nixvim = {
-      # url = "github:nix-community/nixvim";
-      url = "github:HeitorAugustoLN/nixvim/lazydev";
+      url = "github:nix-community/nixvim";
       inputs = {
-        devshell.follows = "";
+        # TODO: Uncomment this after nix-community/nixvim#2948 is fixed
+        # devshell.follows = "";
         flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
         git-hooks.follows = "git-hooks";
