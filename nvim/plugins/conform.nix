@@ -34,27 +34,13 @@
       '';
 
       formatters = {
-        nixfmt = {
-          command = lib.getExe pkgs.nixfmt-rfc-style;
-        };
-        ruff_fix = {
-          command = lib.getExe pkgs.ruff;
-        };
-        ruff_format = {
-          command = lib.getExe pkgs.ruff;
-        };
-        ruff_organize_imports = {
-          command = lib.getExe pkgs.ruff;
-        };
-        rustfmt = {
-          command = lib.getExe pkgs.rustfmt;
-        };
-        squeeze_blanks = {
-          command = lib.getExe' pkgs.coreutils "cat";
-        };
-        stylua = {
-          command = lib.getExe pkgs.stylua;
-        };
+        nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
+        ruff_fix.command = lib.getExe pkgs.ruff;
+        ruff_format.command = lib.getExe pkgs.ruff;
+        ruff_organize_imports.command = lib.getExe pkgs.ruff;
+        rustfmt.command = lib.getExe pkgs.rustfmt;
+        squeeze_blanks.command = lib.getExe' pkgs.coreutils "cat";
+        stylua.command = lib.getExe pkgs.stylua;
       };
 
       formatters_by_ft = {

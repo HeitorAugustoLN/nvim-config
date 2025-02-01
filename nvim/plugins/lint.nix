@@ -1,7 +1,10 @@
 { lib, pkgs, ... }:
 {
+  autoGroups.nvim-lint.clear = true;
+
   plugins.lint = {
     enable = true;
+
     lazyLoad.settings.event = [
       "BufNewFile"
       "BufReadPost"
@@ -19,15 +22,9 @@
     };
 
     linters = {
-      deadnix = {
-        cmd = lib.getExe pkgs.deadnix;
-      };
-      statix = {
-        cmd = lib.getExe pkgs.statix;
-      };
-      ruff = {
-        cmd = lib.getExe pkgs.ruff;
-      };
+      deadnix.cmd = lib.getExe pkgs.deadnix;
+      statix.cmd = lib.getExe pkgs.statix;
+      ruff.cmd = lib.getExe pkgs.ruff;
     };
 
     lintersByFt = {
@@ -36,12 +33,6 @@
         "statix"
       ];
       python = [ "ruff" ];
-    };
-  };
-
-  autoGroups = {
-    nvim-lint = {
-      clear = true;
     };
   };
 }

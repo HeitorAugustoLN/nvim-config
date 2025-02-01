@@ -2,6 +2,7 @@
 {
   plugins.treesitter = {
     enable = true;
+
     lazyLoad.settings = {
       cmd = [
         "TSInstall"
