@@ -34,16 +34,8 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs = {
-        # TODO: Uncomment this after nix-community/nixvim#2948 is fixed
-        # devshell.follows = "";
-        flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        home-manager.follows = "";
         nixpkgs.follows = "nixpkgs";
-        nix-darwin.follows = "";
-        nuschtosSearch.follows = "";
-        treefmt-nix.follows = "treefmt-nix";
       };
     };
 
