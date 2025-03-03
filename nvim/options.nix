@@ -4,12 +4,17 @@
   pkgs,
   ...
 }:
+let
+  inherit (builtins) elem;
+  inherit (lib) optionalAttrs;
+in
 {
   clipboard = {
     providers = {
       wl-copy.enable = true;
       xsel.enable = true;
     };
+
     register.__raw = ''vim.env.SSH_TTY and "" or "unnamedplus"'';
   };
 
@@ -23,6 +28,7 @@
       completeopt = "menu,menuone,noselect";
       cursorline = true;
       expandtab = true;
+
       fillchars = {
         eob = " ";
         fold = " ";
@@ -30,6 +36,7 @@
         foldopen = "";
         foldsep = " ";
       };
+
       foldcolumn = "1";
       foldenable = true;
       foldlevel = 99;
@@ -39,11 +46,13 @@
       laststatus = 3;
       linebreak = true;
       list = true;
+
       listchars = {
         nbsp = "␣";
         tab = "» ";
         trail = "·";
       };
+
       mouse = "a";
       number = true;
       pumblend = 10;
@@ -72,11 +81,11 @@
       updatetime = 200;
       wrap = false;
     }
-    // lib.optionalAttrs (builtins.elem pkgs.ripgrep config.extraPackages) {
+    // optionalAttrs (elem pkgs.ripgrep config.extraPackages) {
       grepformat = "%f:%l:%c:%m";
       grepprg = "rg --vimgrep";
     }
-    // lib.optionalAttrs config.plugins.conform-nvim.enable {
+    // optionalAttrs config.plugins.conform-nvim.enable {
       formatexpr = "v:lua.require'conform'.formatexpr()";
     };
 }

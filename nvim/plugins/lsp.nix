@@ -1,10 +1,13 @@
 {
-  inputs,
   lib,
   pkgs,
+  self,
   system,
   ...
 }:
+let
+  inherit (lib) getExe;
+in
 {
   plugins.lsp = {
     enable = true;
@@ -33,11 +36,11 @@
         enable = true;
         settings =
           let
-            flake = ''(builtins.getFlake "${inputs.self}")'';
+            flake = ''(builtins.getFlake "${self}")'';
           in
           {
             nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
-            formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+            formatting.command = [ "${getExe pkgs.nixfmt-rfc-style}" ];
             options.nixvim.expr = "${flake}.packages.${system}.nvim.options";
           };
       };

@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkIf optionalString;
+in
 {
   plugins = {
     blink-cmp = {
@@ -32,7 +35,7 @@
         before.__raw = ''
           function()
             require("lz.n").trigger_load("blink-compat")
-            ${lib.optionalString config.plugins.luasnip.enable ''require("lz.n").trigger_load("luasnip")''}
+            ${optionalString config.plugins.luasnip.enable ''require("lz.n").trigger_load("luasnip")''}
           end
         '';
         event = "DeferredUIEnter";
@@ -71,7 +74,7 @@
           window.border = "rounded";
         };
 
-        snippets.preset = lib.mkIf config.plugins.luasnip.enable "luasnip";
+        snippets.preset = mkIf config.plugins.luasnip.enable "luasnip";
 
         sources.default = [
           "lsp"

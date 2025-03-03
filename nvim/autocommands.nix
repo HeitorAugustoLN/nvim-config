@@ -10,6 +10,7 @@
       event = "TextYankPost";
       group = "highlight-yank";
     }
+
     {
       callback.__raw = ''
         function(event)

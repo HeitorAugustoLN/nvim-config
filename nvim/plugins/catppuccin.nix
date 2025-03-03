@@ -1,7 +1,10 @@
 { config, lib, ... }:
+let
+  inherit (lib) mkOption types;
+in
 {
-  options.catppuccin.flavor = lib.mkOption {
-    type = lib.types.enum [
+  options.catppuccin.flavor = mkOption {
+    type = types.enum [
       "latte"
       "frappe"
       "macchiato"
@@ -14,15 +17,18 @@
 
   config = {
     colorscheme = "catppuccin";
+
     colorschemes.catppuccin = {
       enable = true;
       lazyLoad.settings.colorscheme = "catppuccin";
 
       settings = {
         flavour = config.catppuccin.flavor;
+
         integrations = {
           blink_cmp = config.plugins.blink-cmp.enable;
         };
+
         transparent_background = false;
       };
     };

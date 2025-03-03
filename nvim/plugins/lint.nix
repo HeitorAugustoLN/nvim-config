@@ -1,4 +1,7 @@
 { lib, pkgs, ... }:
+let
+  inherit (lib) getExe;
+in
 {
   autoGroups.nvim-lint.clear = true;
 
@@ -22,9 +25,9 @@
     };
 
     linters = {
-      deadnix.cmd = lib.getExe pkgs.deadnix;
-      statix.cmd = lib.getExe pkgs.statix;
-      ruff.cmd = lib.getExe pkgs.ruff;
+      deadnix.cmd = getExe pkgs.deadnix;
+      statix.cmd = getExe pkgs.statix;
+      ruff.cmd = getExe pkgs.ruff;
     };
 
     lintersByFt = {
@@ -32,6 +35,7 @@
         "deadnix"
         "statix"
       ];
+
       python = [ "ruff" ];
     };
   };

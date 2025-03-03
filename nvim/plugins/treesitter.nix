@@ -9,12 +9,14 @@
         "TSUpdate"
         "TSUpdateSync"
       ];
+
       event = [
         "BufNewFile"
         "BufReadPost"
         "BufWritePost"
         "DeferredUIEnter"
       ];
+
       lazy.__raw = "vim.fn.argc(-1) == 0";
     };
 
@@ -27,6 +29,7 @@
         enable = true;
         additional_vim_regex_highlighting = [ "ruby" ];
       };
+
       indent = {
         enable = true;
         disable = [ "ruby" ];

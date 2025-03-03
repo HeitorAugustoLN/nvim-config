@@ -11,6 +11,7 @@
       default_file_explorer = true;
       delete_to_trash = true;
       skip_confirm_for_simple_edits = true;
+
       view_options = {
         is_always_hidden.__raw = ''
           function(name, _)
@@ -26,6 +27,7 @@
         natural_order = true;
         show_hidden = true;
       };
+
       win_options = {
         wrap = true;
       };
