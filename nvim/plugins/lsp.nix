@@ -15,6 +15,7 @@
           require("lz.n").trigger_load("blink.cmp")
         end
       '';
+
       event = [
         "BufNewFile"
         "BufReadPost"
@@ -25,11 +26,7 @@
     servers = {
       lua_ls = {
         enable = true;
-        settings = {
-          completion = {
-            callSnippet = "Replace";
-          };
-        };
+        settings.completion.callSnippet = "Replace";
       };
 
       nixd = {
@@ -40,9 +37,7 @@
           in
           {
             nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
-            formatting = {
-              command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
-            };
+            formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
             options.nixvim.expr = "${flake}.packages.${system}.nvim.options";
           };
       };

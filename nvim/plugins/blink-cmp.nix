@@ -33,8 +33,6 @@
           function()
             require("lz.n").trigger_load("blink-compat")
             ${lib.optionalString config.plugins.luasnip.enable ''require("lz.n").trigger_load("luasnip")''}
-            -- HACK: Module always gets required by blink.cmp even when not needed, so we load it before anyways
-            require("lz.n").trigger_load("lazydev.nvim")
           end
         '';
         event = "DeferredUIEnter";
@@ -75,50 +73,18 @@
 
         snippets.preset = lib.mkIf config.plugins.luasnip.enable "luasnip";
 
-        sources =
-          let
-            default = [
-              "lsp"
-              "path"
-              "snippets"
-              "buffer"
-            ];
-          in
-          {
-            inherit default;
-            per_filetype = {
-              lua = [ "lazydev" ] ++ default;
-            };
-
-            providers = {
-              lazydev = {
-                name = "LazyDev";
-                module = "lazydev.integrations.blink";
-                score_offset = 100;
-              };
-            };
-          };
+        sources.default = [
+          "lsp"
+          "path"
+          "snippets"
+          "buffer"
+        ];
       };
     };
 
     blink-compat = {
       enable = true;
       lazyLoad.settings.lazy = true;
-    };
-
-    lazydev = {
-      enable = true;
-      lazyLoad.settings = {
-        cmd = "LazyDev";
-        ft = "lua";
-      };
-
-      settings.library = [
-        {
-          path = "${pkgs.vimPlugins.luvit-meta}/luv/library";
-          words = [ "vim%.uv" ];
-        }
-      ];
     };
 
     lsp.capabilities = ''
