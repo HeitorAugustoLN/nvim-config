@@ -10,6 +10,7 @@
       deno.enable = true; # For markdown files
       nixfmt.enable = true;
       statix.enable = true;
+
       stylua = {
         enable = true;
         settings = {
@@ -22,6 +23,7 @@
           quote_style = "AutoPreferDouble";
         };
       };
+
       taplo.enable = true;
     };
 

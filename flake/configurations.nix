@@ -28,10 +28,12 @@
     {
       nixvimConfigurations = {
         default = self'.nixvimConfigurations.nvim;
+
         nvim = inputs.nixvim.lib.evalNixvim {
           inherit extraSpecialArgs system;
           modules = [ ../nvim ];
         };
+
         nvim-nightly = inputs.nixvim.lib.evalNixvim {
           inherit extraSpecialArgs system;
           modules = [
