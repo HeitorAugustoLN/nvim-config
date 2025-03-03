@@ -8,6 +8,26 @@
   plugins = {
     blink-cmp = {
       enable = true;
+      package = pkgs.vimPlugins.blink-cmp.overrideAttrs {
+        preInstall =
+          let
+            ext = pkgs.stdenv.hostPlatform.extensions.sharedLibrary;
+          in
+          ''
+            mkdir -p target/release
+            ln -s ${pkgs.vimPlugins.blink-cmp.blink-fuzzy-lib}/lib/libblink_cmp_fuzzy${ext} target/release/libblink_cmp_fuzzy${ext}
+            echo -n "nix" > target/release/version
+          '';
+
+        patches = [
+          (pkgs.fetchpatch {
+            name = "blink-add-bypass-for-nix.patch";
+            url = "https://github.com/Saghen/blink.cmp/commit/6c83ef1ae34abd7ef9a32bfcd9595ac77b61037c.diff?full_index=1";
+            hash = "sha256-304F1gDDKVI1nXRvvQ0T1xBN+kHr3jdmwMMp8CNl+GU=";
+          })
+        ];
+
+      };
       lazyLoad.settings = {
         before.__raw = ''
           function()
