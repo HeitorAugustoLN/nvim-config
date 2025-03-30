@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  self,
+  ...
+}:
 {
   imports = [ inputs.nixvim.flakeModules.default ];
 
@@ -16,12 +21,11 @@
     }:
     let
       extraSpecialArgs = {
-        inherit (inputs) self;
         inherit
           inputs
           inputs'
+          self
           self'
-          system
           ;
       };
     in
