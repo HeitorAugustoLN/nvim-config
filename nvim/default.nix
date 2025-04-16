@@ -1,1 +1,4 @@
-{ }
+{ pkgs, ... }:
+{
+  extraPackages = [ pkgs.ripgrep ];
+}
