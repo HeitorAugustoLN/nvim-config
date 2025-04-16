@@ -14,11 +14,11 @@
       indentSize = 2;
     in
     {
-      completeopt = "menu,menuone,noselect";
       confirm = true;
       cursorline = true;
       cursorlineopt = "number";
       expandtab = true;
+      foldlevel = 99;
       inccommand = "split";
       ignorecase = true;
       laststatus = 3;

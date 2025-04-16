@@ -9,7 +9,9 @@
         end
       '';
 
+      cmd = "Oil";
       event = "DeferredUIEnter";
+      keys = [ "-" ];
       lazy.__raw = "vim.fn.argc(-1) == 0";
     };
 
