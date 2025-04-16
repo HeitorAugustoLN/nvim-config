@@ -17,7 +17,7 @@
       };
     };
 
-    neovim-nightly = {
+    neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
         flake-compat.follows = "flake-compat";

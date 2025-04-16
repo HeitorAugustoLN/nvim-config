@@ -27,18 +27,18 @@
     in
     {
       nixvimConfigurations = {
-        default = self'.nixvimConfigurations.nvim;
+        default = self'.nixvimConfigurations.neovim;
 
-        nvim = inputs.nixvim.lib.evalNixvim {
+        neovim = inputs.nixvim.lib.evalNixvim {
           inherit extraSpecialArgs system;
           modules = [ ../nvim ];
         };
 
-        nvim-nightly = inputs.nixvim.lib.evalNixvim {
+        neovim-nightly = inputs.nixvim.lib.evalNixvim {
           inherit extraSpecialArgs system;
           modules = [
             ../nvim
-            { package = lib.mkForce inputs'.neovim-nightly.packages.neovim; }
+            { package = lib.mkForce inputs'.neovim-nightly-overlay.packages.neovim; }
           ];
         };
       };

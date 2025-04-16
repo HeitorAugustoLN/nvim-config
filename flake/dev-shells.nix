@@ -8,20 +8,20 @@
     }:
     {
       devShells = {
-        default = self'.devShells.nvim;
+        default = self'.devShells.neovim;
 
-        nvim = pkgs.mkShell {
+        neovim = pkgs.mkShell {
           shellHook = config.pre-commit.installationScript;
 
           strictDeps = true;
-          nativeBuildInputs = [ self'.packages.nvim ];
+          nativeBuildInputs = [ self'.packages.neovim ];
         };
 
-        nvim-nightly = pkgs.mkShell {
+        neovim-nightly = pkgs.mkShell {
           shellHook = config.pre-commit.installationScript;
 
           strictDeps = true;
-          nativeBuildInputs = [ self'.packages.nvim-nightly ];
+          nativeBuildInputs = [ self'.packages.neovim-nightly ];
         };
       };
     };
