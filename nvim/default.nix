@@ -3,6 +3,7 @@
   imports = [
     ./globals.nix
     ./options.nix
+    ./performance.nix
     ./plugins/catppuccin.nix
     ./plugins/lz-n.nix
     ./plugins/mini.nix
