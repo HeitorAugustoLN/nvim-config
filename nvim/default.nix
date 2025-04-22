@@ -13,4 +13,5 @@
   ];
 
   extraPackages = [ pkgs.ripgrep ];
+  wrapRc = true;
 }
