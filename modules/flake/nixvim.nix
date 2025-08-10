@@ -21,7 +21,10 @@
   perSystem =
     { self', system, ... }:
     let
-      modules = with config.flake.modules.nixvim; [ oil ];
+      modules = with config.flake.modules.nixvim; [
+        lz-n
+        oil
+      ];
     in
     {
       nixvimConfigurations = {
