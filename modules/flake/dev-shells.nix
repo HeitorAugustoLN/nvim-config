@@ -7,22 +7,26 @@
       ...
     }:
     {
-      devShells = {
-        default = self'.devShells.nvim;
+      devShells =
+        let
+          packages = [ self'.packages.write-flake ];
+        in
+        {
+          default = self'.devShells.stable;
 
-        nvim = pkgs.mkShell {
-          shellHook = config.pre-commit.installationScript;
+          stable = pkgs.mkShell {
+            shellHook = config.pre-commit.installationScript;
 
-          strictDeps = true;
-          nativeBuildInputs = [ self'.packages.nvim ];
+            strictDeps = true;
+            nativeBuildInputs = packages ++ [ self'.packages.stable ];
+          };
+
+          nightly = pkgs.mkShell {
+            shellHook = config.pre-commit.installationScript;
+
+            strictDeps = true;
+            nativeBuildInputs = packages ++ [ self'.packages.nightly ];
+          };
         };
-
-        nvim-nightly = pkgs.mkShell {
-          shellHook = config.pre-commit.installationScript;
-
-          strictDeps = true;
-          nativeBuildInputs = [ self'.packages.nvim-nightly ];
-        };
-      };
     };
 }

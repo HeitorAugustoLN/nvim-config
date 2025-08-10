@@ -1,1 +1,1 @@
-{ flake.modules.nixvim.lua-loader.luaLoader.enable = true; }
+{ flake.modules.nixvim.luaLoader.luaLoader.enable = true; }

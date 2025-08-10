@@ -22,23 +22,22 @@
     { self', system, ... }:
     let
       modules = with config.flake.modules.nixvim; [
+        byteCompileLua
         diagnostic
-        line-numbers
-        lua-loader
+        leader
+        lineNumbers
+        luaLoader
         lz-n
         oil
-        performance
       ];
     in
     {
       nixvimConfigurations = {
-        default = self'.nixvimConfigurations.nvim;
+        default = self'.nixvimConfigurations.stable;
 
-        nvim = inputs.nixvim.lib.evalNixvim {
-          inherit modules system;
-        };
+        stable = inputs.nixvim.lib.evalNixvim { inherit modules system; };
 
-        nvim-nightly = inputs.nixvim.lib.evalNixvim {
+        nightly = inputs.nixvim.lib.evalNixvim {
           inherit system;
           modules = modules ++ [ config.flake.modules.nixvim.nightly ];
         };

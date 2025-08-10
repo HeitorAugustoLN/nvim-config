@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.line-numbers.opts = {
+  flake.modules.nixvim.lineNumbers.opts = {
     number = true;
     relativenumber = true;
   };
