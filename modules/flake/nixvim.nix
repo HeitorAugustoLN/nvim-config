@@ -23,6 +23,7 @@
     let
       modules = with config.flake.modules.nixvim; [
         byteCompileLua
+        combinePlugins
         diagnostic
         leader
         lineNumbers
