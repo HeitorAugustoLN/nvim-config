@@ -22,8 +22,12 @@
     { self', system, ... }:
     let
       modules = with config.flake.modules.nixvim; [
+        diagnostic
+        line-numbers
+        lua-loader
         lz-n
         oil
+        performance
       ];
     in
     {
