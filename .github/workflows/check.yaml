@@ -30,4 +30,4 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
       - name: Run flake check
-        run: nix flake check --system ${{ matrix.system }}
+        run: nix flake check --extra-experimental-features pipe-operators --system ${{ matrix.system }}
