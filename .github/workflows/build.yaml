@@ -9,10 +9,11 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.system }}
+    name: Build ${{ matrix.package }} on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
+        package: [stable, nightly]
         include:
           - runner: ubuntu-latest
             system: x86_64-linux
@@ -31,7 +32,5 @@ jobs:
           extra-conf: |
             extra-experimental-features = pipe-operators
             system = ${{ matrix.system }}
-      - name: Build stable neovim
-        run: nix build .#stable --accept-flake-config
-      - name: Build nightly neovim
-        run: nix build .#nightly --accept-flake-config
+      - name: Build ${{ matrix.package }} neovim
+        run: nix build .#${{ matrix.package }} --accept-flake-config
