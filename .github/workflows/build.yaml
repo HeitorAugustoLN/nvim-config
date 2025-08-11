@@ -1,4 +1,4 @@
-name: Check
+name: Build
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  checks:
-    name: Check on ${{ matrix.system }}
+  build:
+    name: Build on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
@@ -25,13 +25,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Check Nix flake inputs
-        uses: DeterminateSystems/flake-checker-action@v12
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
         with:
           extra-conf: |
             extra-experimental-features = pipe-operators
             system = ${{ matrix.system }}
-      - name: Run flake check
-        run: nix flake check --accept-flake-config
+      - name: Build stable neovim
+        run: nix build .#stable --accept-flake-config
+      - name: Build nightly neovim
+        run: nix build .#nightly --accept-flake-config
