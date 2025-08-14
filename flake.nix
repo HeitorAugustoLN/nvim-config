@@ -1,5 +1,5 @@
 {
-  description = "HeitorAugustoLN's personal Neovim configuration made with Nixvim";
+  description = "HeitorAugustoLN's personal Neovim configuration";
 
   inputs = {
     flake-parts = {
