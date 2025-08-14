@@ -13,14 +13,33 @@
   };
 
   inputs = {
+    flake-compat = {
+      owner = "edolstra";
+      repo = "flake-compat";
+      type = "github";
+    };
     flake-file = {
       owner = "vic";
+      ref = "pull/27/head";
       repo = "flake-file";
       type = "github";
     };
     flake-parts = {
       owner = "hercules-ci";
       repo = "flake-parts";
+      type = "github";
+    };
+    git-hooks = {
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      owner = "cachix";
+      repo = "git-hooks.nix";
       type = "github";
     };
     import-tree = {
@@ -37,6 +56,16 @@
     systems = {
       owner = "nix-systems";
       repo = "default";
+      type = "github";
+    };
+    treefmt-nix = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      owner = "numtide";
+      repo = "treefmt-nix";
       type = "github";
     };
   };
