@@ -16,6 +16,38 @@
       "url": "https://api.github.com/repos/catppuccin/nvim/tarball/v1.11.0",
       "hash": "1p5j53vzi14vm39qyb9c8wpbzd2ywy1z9cqw782vz3gccis1zngs"
     },
+    "mini.ai": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "echasnovski",
+        "repo": "mini.ai"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.16.0",
+      "revision": "ef25f8090213a719c6b992d92be5880ba9fbbe3a",
+      "url": "https://api.github.com/repos/echasnovski/mini.ai/tarball/v0.16.0",
+      "hash": "1lc7nwxlm4ndf2d2m4y90dybscig39qh5ijacns5r40w31rfgpmc"
+    },
+    "mini.surround": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "echasnovski",
+        "repo": "mini.surround"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.16.0",
+      "revision": "5a0cef47af7f1930c0c1adf9b32dcfe3f6a4b4bc",
+      "url": "https://api.github.com/repos/echasnovski/mini.surround/tarball/v0.16.0",
+      "hash": "0hsy7ngqz17a663k4gkj9ambbcn24jvqx7010aiv8g4b0gbmzhky"
+    },
     "oil.nvim": {
       "type": "GitRelease",
       "repository": {

@@ -43,7 +43,13 @@
               };
 
               start = inputs.mnw.lib.npinsToPlugins pkgs ../../start.json;
-              opt = inputs.mnw.lib.npinsToPlugins pkgs ../../opt.json;
+              opt =
+                with pkgs.vimPlugins;
+                [
+                  blink-cmp
+                  nvim-treesitter.withAllGrammars
+                ]
+                ++ inputs.mnw.lib.npinsToPlugins pkgs ../../opt.json;
             };
 
             providers = {
