@@ -1,5 +1,21 @@
 {
   "pins": {
+    "catppuccin": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "catppuccin",
+        "repo": "nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.11.0",
+      "revision": "cb5665990a797b102715188e73c44c3931b3b42e",
+      "url": "https://api.github.com/repos/catppuccin/nvim/tarball/v1.11.0",
+      "hash": "1p5j53vzi14vm39qyb9c8wpbzd2ywy1z9cqw782vz3gccis1zngs"
+    },
     "oil.nvim": {
       "type": "GitRelease",
       "repository": {
