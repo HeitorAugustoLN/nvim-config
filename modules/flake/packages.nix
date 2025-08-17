@@ -1,27 +1,5 @@
 { inputs, ... }:
 {
-  flake-file.inputs = {
-    mnw = {
-      type = "github";
-      owner = "Gerg-L";
-      repo = "mnw";
-    };
-
-    neovim-nightly-overlay = {
-      type = "github";
-      owner = "nix-community";
-      repo = "neovim-nightly-overlay";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-  };
-
   perSystem =
     {
       self',
@@ -34,6 +12,12 @@
         let
           commonArgs = {
             appName = "nvim-heitor";
+
+            extraBinPath = with pkgs; [
+              lua-language-server
+              nixd
+            ];
+
             initLua = builtins.readFile ../../init.lua;
 
             plugins = {

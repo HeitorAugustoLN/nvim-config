@@ -1,5 +1,3 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
-# Use `nix run .#write-flake` to regenerate it.
 {
   description = "HeitorAugustoLN's personal Neovim configuration";
 
@@ -14,87 +12,73 @@
 
   inputs = {
     flake-compat = {
+      type = "github";
       owner = "edolstra";
       repo = "flake-compat";
-      type = "github";
     };
-    flake-file = {
-      owner = "vic";
-      ref = "pull/27/head";
-      repo = "flake-file";
-      type = "github";
-    };
+
     flake-parts = {
+      type = "github";
       owner = "hercules-ci";
       repo = "flake-parts";
-      type = "github";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+
     git-hooks = {
-      inputs = {
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      type = "github";
       owner = "cachix";
       repo = "git-hooks.nix";
-      type = "github";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
+
     import-tree = {
+      type = "github";
       owner = "vic";
       repo = "import-tree";
-      type = "github";
     };
+
     mnw = {
+      type = "github";
       owner = "Gerg-L";
       repo = "mnw";
-      type = "github";
     };
+
     neovim-nightly-overlay = {
-      inputs = {
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        flake-parts = {
-          follows = "flake-parts";
-        };
-        git-hooks = {
-          follows = "git-hooks";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-        treefmt-nix = {
-          follows = "treefmt-nix";
-        };
-      };
+      type = "github";
       owner = "nix-community";
       repo = "neovim-nightly-overlay";
-      type = "github";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
+
     nixpkgs = {
-      owner = "NixOS";
-      ref = "nixpkgs-unstable";
-      repo = "nixpkgs";
       type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixpkgs-unstable";
     };
+
     systems = {
+      type = "github";
       owner = "nix-systems";
       repo = "default";
-      type = "github";
     };
+
     treefmt-nix = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      type = "github";
       owner = "numtide";
       repo = "treefmt-nix";
-      type = "github";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
 }

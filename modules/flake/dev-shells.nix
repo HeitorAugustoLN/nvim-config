@@ -9,10 +9,7 @@
     {
       devShells =
         let
-          packages = [
-            self'.packages.write-flake
-            pkgs.npins
-          ];
+          packages = [ pkgs.npins ];
         in
         {
           default = self'.devShells.stable;
