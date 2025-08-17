@@ -15,7 +15,9 @@ jobs:
       matrix:
         package:
           - stable
+          - stable-dev
           - nightly
+          - nightly-dev
         system:
           - x86_64-linux
           - x86_64-darwin
