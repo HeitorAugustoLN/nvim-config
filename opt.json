@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v1.11.0",
-      "revision": "cb5665990a797b102715188e73c44c3931b3b42e",
-      "url": "https://api.github.com/repos/catppuccin/nvim/tarball/v1.11.0",
-      "hash": "1p5j53vzi14vm39qyb9c8wpbzd2ywy1z9cqw782vz3gccis1zngs"
+      "version": "v1.10.0",
+      "revision": "1bf070129c0b6f77cc23f6a2212dcdc868308c52",
+      "url": "https://api.github.com/repos/catppuccin/nvim/tarball/v1.10.0",
+      "hash": ""
     },
     "mini.ai": {
       "type": "GitRelease",
@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.16.0",
-      "revision": "ef25f8090213a719c6b992d92be5880ba9fbbe3a",
-      "url": "https://api.github.com/repos/echasnovski/mini.ai/tarball/v0.16.0",
-      "hash": "1lc7nwxlm4ndf2d2m4y90dybscig39qh5ijacns5r40w31rfgpmc"
+      "version": "v0.15.0",
+      "revision": "8c40e7de86648e27a40c95ab7847b5f9b8965be5",
+      "url": "https://api.github.com/repos/echasnovski/mini.ai/tarball/v0.15.0",
+      "hash": ""
     },
     "mini.surround": {
       "type": "GitRelease",
@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.16.0",
-      "revision": "5a0cef47af7f1930c0c1adf9b32dcfe3f6a4b4bc",
-      "url": "https://api.github.com/repos/echasnovski/mini.surround/tarball/v0.16.0",
-      "hash": "0hsy7ngqz17a663k4gkj9ambbcn24jvqx7010aiv8g4b0gbmzhky"
+      "version": "v0.15.0",
+      "revision": "355cb63a9bdce14f5b9c715f9b43806099330615",
+      "url": "https://api.github.com/repos/echasnovski/mini.surround/tarball/v0.15.0",
+      "hash": ""
     },
     "nvim-lspconfig": {
       "type": "GitRelease",
@@ -59,10 +59,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.4.0",
-      "revision": "3db16ceeea947517f0dc1404c24dcb5ab0c91d26",
-      "url": "https://api.github.com/repos/neovim/nvim-lspconfig/tarball/v2.4.0",
-      "hash": "0gam1rxqkxksayblhj1i7jkh4sqjp6lpvyb1psmrhkryj6967ir2"
+      "version": "v2.3.0",
+      "revision": "77d3fdfb3554632c7a3b101ded643d422de7626f",
+      "url": "https://api.github.com/repos/neovim/nvim-lspconfig/tarball/v2.3.0",
+      "hash": ""
     },
     "oil.nvim": {
       "type": "GitRelease",
@@ -75,10 +75,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.15.0",
-      "revision": "975a77cce3c8cb742bc1b3629f4328f5ca977dad",
-      "url": "https://api.github.com/repos/stevearc/oil.nvim/tarball/v2.15.0",
-      "hash": "0rrv7wg0nwfj5fd6byxs4np1p18xxdzyv11ba6vqqh3s6z0qwawc"
+      "version": "v2.14.0",
+      "revision": "ba858b662599eab8ef1cba9ab745afded99cb180",
+      "url": "https://api.github.com/repos/stevearc/oil.nvim/tarball/v2.14.0",
+      "hash": ""
     }
   },
   "version": 5
