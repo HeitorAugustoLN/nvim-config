@@ -1,4 +1,4 @@
-name: "Flake update"
+name: "Update flake"
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
     - cron: '0 0 * * 1' # Runs weekly on monday at 00:00
 
 jobs:
-  flake-update:
-    name: Flake update
+  update-flake:
+    name: Update flake
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,6 +22,7 @@ jobs:
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v27
         with:
+          branch: update-flake
           commit-msg: "chore(deps): update flake.lock"
           pr-assignees: HeitorAugustoLN
           pr-labels: dependencies
