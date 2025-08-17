@@ -30,167 +30,107 @@ jobs:
           echo "Full npins output:"
           echo "$full_output"
 
-          changed_plugins=$(echo "$full_output" | grep -B1 "Changes:" | grep -o '\[.*\]' | tr -d '[]' || true)
-          no_change_plugins=$(echo "$full_output" | grep "No Changes" | grep -o '\[.*\]' | tr -d '[]' || true)
-
-          if [[ -n "$changed_plugins" ]]; then
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-
-            changes_detail=""
-
-            echo "$full_output" | awk '
-            /^\[.*\] Changes:/ {
-              plugin = $0
-              gsub(/^\[/, "", plugin)
-              gsub(/\] Changes:/, "", plugin)
-              print "PLUGIN:" plugin
-              next
-            }
-            /^-.*version:/ {
-              gsub(/^-.*version: /, "", $0)
-              print "OLD_VERSION:" $0
-              next
-            }
-            /^\+.*version:/ {
-              gsub(/^\+.*version: /, "", $0)
-              print "NEW_VERSION:" $0
-              next
-            }
-            /^-.*revision:/ {
-              gsub(/^-.*revision: /, "", $0)
-              print "OLD_REVISION:" substr($0, 1, 8)
-              next
-            }
-            /^\+.*revision:/ {
-              gsub(/^\+.*revision: /, "", $0)
-              print "NEW_REVISION:" substr($0, 1, 8)
-              next
-            }
-            /^-.*hash:/ {
-              gsub(/^-.*hash: /, "", $0)
-              print "OLD_HASH:" substr($0, 1, 12)
-              next
-            }
-            /^\+.*hash:/ {
-              gsub(/^\+.*hash: /, "", $0)
-              print "NEW_HASH:" substr($0, 1, 12)
-              next
-            }
-            /^Updated/ || /^\[.*\] No Changes/ {
-              if (plugin) {
-                print "END_PLUGIN"
-                plugin = ""
-              }
-            }' > /tmp/parsed_changes
-
-            current_plugin=""
-            old_version=""
-            new_version=""
-            old_revision=""
-            new_revision=""
-            old_hash=""
-            new_hash=""
-
-            while IFS=: read -r key value; do
-              case $key in
-                "PLUGIN")
-                  current_plugin="$value"
-                  ;;
-                "OLD_VERSION")
-                  old_version="$value"
-                  ;;
-                "NEW_VERSION")
-                  new_version="$value"
-                  ;;
-                "OLD_REVISION")
-                  old_revision="$value"
-                  ;;
-                "NEW_REVISION")
-                  new_revision="$value"
-                  ;;
-                "OLD_HASH")
-                  old_hash="$value"
-                  ;;
-                "NEW_HASH")
-                  new_hash="$value"
-                  ;;
-                "END_PLUGIN")
-                  if [[ -n "$current_plugin" ]]; then
-                    changes_detail+="- $current_plugin: "
-
-                    if [[ -n "$old_version" && -n "$new_version" ]]; then
-                      changes_detail+="$old_version → $new_version"$'\n'
-                    else
-                      changes_detail+="updated to latest revision"$'\n'
-                    fi
-
-                    if [[ -n "$old_revision" && -n "$new_revision" ]]; then
-                      changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
-                    fi
-
-                    if [[ -n "$old_hash" && -n "$new_hash" ]]; then
-                      changes_detail+="  - hash: $old_hash → $new_hash"$'\n'
-                    fi
-
-                    # Reset variables
-                    current_plugin=""
-                    old_version=""
-                    new_version=""
-                    old_revision=""
-                    new_revision=""
-                    old_hash=""
-                    new_hash=""
-                  fi
-                  ;;
-              esac
-            done < /tmp/parsed_changes
-
-            if [[ -n "$current_plugin" ]]; then
-              changes_detail+="- $current_plugin: "
-
-              if [[ -n "$old_version" && -n "$new_version" ]]; then
-                changes_detail+="$old_version → $new_version"$'\n'
-              else
-                changes_detail+="updated to latest revision"$'\n'
-              fi
-
-              if [[ -n "$old_revision" && -n "$new_revision" ]]; then
-                changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
-              fi
-
-              if [[ -n "$old_hash" && -n "$new_hash" ]]; then
-                changes_detail+="  - hash: $old_hash → $new_hash"$'\n'
-              fi
-            fi
-
-            plugin_count=$(echo "$changed_plugins" | wc -w)
-            if [[ $plugin_count -eq 1 ]]; then
-              title="feat: update $changed_plugins plugin"
-            else
-              title="feat: update plugins"
-            fi
-
-            commit_body="Updates:"$'\n'"$changes_detail"
-
-            if [[ -n "$no_change_plugins" ]]; then
-              commit_body+=$'\n'"No changes required for:"$'\n'
-              echo "$no_change_plugins" | while read -r plugin; do
-                commit_body+="- $plugin"$'\n'
-              done
-            fi
-
-            commit_body+=$'\n'"This update was automatically generated by the update-plugins workflow."
-
-            echo "title=$title" >> $GITHUB_OUTPUT
-            {
-              echo "commit_body<<EOF"
-              echo "$commit_body"
-              echo "EOF"
-            } >> $GITHUB_OUTPUT
-          else
+          if ! echo "$full_output" | grep -q "Changes:"; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No plugin updates available. Skipping PR creation."
+            exit 0
           fi
+
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+
+          changes_detail=""
+          no_change_plugins=""
+          changed_plugins_list=""
+
+          current_plugin=""
+          in_changes=false
+          old_version=""
+          new_version=""
+          old_revision=""
+          new_revision=""
+
+          while IFS= read -r line; do
+            if [[ $line =~ ^\[([^\]]+)\]\ Changes: ]]; then
+              current_plugin="${BASH_REMATCH[1]}"
+              in_changes=true
+              changed_plugins_list+="$current_plugin "
+              continue
+            fi
+
+            if [[ $line =~ ^\[([^\]]+)\]\ No\ Changes ]]; then
+              no_change_plugins+="- ${BASH_REMATCH[1]}"$'\n'
+              continue
+            fi
+
+            if [[ $in_changes == true && -n $current_plugin ]]; then
+              if [[ $line =~ ^-.*version:\ (.+) ]]; then
+                old_version="${BASH_REMATCH[1]}"
+              elif [[ $line =~ ^\+.*version:\ (.+) ]]; then
+                new_version="${BASH_REMATCH[1]}"
+              elif [[ $line =~ ^-.*revision:\ (.+) ]]; then
+                old_revision="${BASH_REMATCH[1]:0:8}"
+              elif [[ $line =~ ^\+.*revision:\ (.+) ]]; then
+                new_revision="${BASH_REMATCH[1]:0:8}"
+              elif [[ $line =~ ^Updated.*pins ]] || [[ $line =~ ^\[.*\] ]]; then
+                if [[ -n $current_plugin ]]; then
+                  changes_detail+="- $current_plugin: "
+
+                  if [[ -n $old_version && -n $new_version ]]; then
+                    changes_detail+="$old_version → $new_version"$'\n'
+                  else
+                    changes_detail+="updated to latest revision"$'\n'
+                  fi
+
+                  if [[ -n $old_revision && -n $new_revision ]]; then
+                    changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
+                  fi
+                fi
+
+                current_plugin=""
+                in_changes=false
+                old_version=""
+                new_version=""
+                old_revision=""
+                new_revision=""
+              fi
+            fi
+          done <<< "$full_output"
+
+          if [[ $in_changes == true && -n $current_plugin ]]; then
+            changes_detail+="- $current_plugin: "
+
+            if [[ -n $old_version && -n $new_version ]]; then
+              changes_detail+="$old_version → $new_version"$'\n'
+            else
+              changes_detail+="updated to latest revision"$'\n'
+            fi
+
+            if [[ -n $old_revision && -n $new_revision ]]; then
+              changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
+            fi
+          fi
+
+          plugin_count=$(echo "$changed_plugins_list" | wc -w)
+          if [[ $plugin_count -eq 1 ]]; then
+            title="feat: update $(echo "$changed_plugins_list" | xargs) plugin"
+          else
+            title="feat: update plugins"
+          fi
+
+          commit_body="Updates:"$'\n'"$changes_detail"
+
+          if [[ -n $no_change_plugins ]]; then
+            commit_body+=$'\n'"No changes required for:"$'\n'"$no_change_plugins"
+          fi
+
+          commit_body+=$'\n'"This update was automatically generated by the update-plugins workflow."
+
+          echo "title=$title" >> $GITHUB_OUTPUT
+          {
+            echo "commit_body<<EOF"
+            echo "$commit_body"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Create pull request
         if: steps.update.outputs.has_changes == 'true'
