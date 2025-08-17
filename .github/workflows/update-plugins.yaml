@@ -1,4 +1,4 @@
-name: "Update plug"
+name: "Update plugins"
 
 on:
   push:
@@ -30,44 +30,140 @@ jobs:
           echo "Full npins output:"
           echo "$full_output"
 
-          changed_plugins=$(echo "$full_output" | grep -B1 "Changes:" | grep -o '\[.*\]' | tr -d '[]' | paste -sd ',' - || true)
+          changed_plugins=$(echo "$full_output" | grep -B1 "Changes:" | grep -o '\[.*\]' | tr -d '[]' || true)
           no_change_plugins=$(echo "$full_output" | grep "No Changes" | grep -o '\[.*\]' | tr -d '[]' || true)
 
           if [[ -n "$changed_plugins" ]]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
 
             changes_detail=""
-            while IFS= read -r line; do
-              if [[ $line =~ \[(.*)\].*Changes: ]]; then
-                plugin_name="${BASH_REMATCH[1]}"
-                changes_detail+="- $plugin_name: "
 
-                version_change=$(echo "$full_output" | sed -n "/\[$plugin_name\]/,/Updated/p" | grep "version:" || true)
-                if [[ -n "$version_change" ]]; then
-                  old_version=$(echo "$version_change" | grep "^-" | sed 's/.*version: //')
-                  new_version=$(echo "$version_change" | grep "^+" | sed 's/.*version: //')
-                  changes_detail+="$old_version → $new_version"$'\n'
-                else
-                  changes_detail+="updated to latest revision"$'\n'
-                fi
+            echo "$full_output" | awk '
+            /^\[.*\] Changes:/ {
+              plugin = $0
+              gsub(/^\[/, "", plugin)
+              gsub(/\] Changes:/, "", plugin)
+              print "PLUGIN:" plugin
+              next
+            }
+            /^-.*version:/ {
+              gsub(/^-.*version: /, "", $0)
+              print "OLD_VERSION:" $0
+              next
+            }
+            /^\+.*version:/ {
+              gsub(/^\+.*version: /, "", $0)
+              print "NEW_VERSION:" $0
+              next
+            }
+            /^-.*revision:/ {
+              gsub(/^-.*revision: /, "", $0)
+              print "OLD_REVISION:" substr($0, 1, 8)
+              next
+            }
+            /^\+.*revision:/ {
+              gsub(/^\+.*revision: /, "", $0)
+              print "NEW_REVISION:" substr($0, 1, 8)
+              next
+            }
+            /^-.*hash:/ {
+              gsub(/^-.*hash: /, "", $0)
+              print "OLD_HASH:" substr($0, 1, 12)
+              next
+            }
+            /^\+.*hash:/ {
+              gsub(/^\+.*hash: /, "", $0)
+              print "NEW_HASH:" substr($0, 1, 12)
+              next
+            }
+            /^Updated/ || /^\[.*\] No Changes/ {
+              if (plugin) {
+                print "END_PLUGIN"
+                plugin = ""
+              }
+            }' > /tmp/parsed_changes
 
-                revision_change=$(echo "$full_output" | sed -n "/\[$plugin_name\]/,/Updated/p" | grep "revision:")
-                if [[ -n "$revision_change" ]]; then
-                  old_rev=$(echo "$revision_change" | grep "^-" | sed 's/.*revision: //' | cut -c1-8)
-                  new_rev=$(echo "$revision_change" | grep "^+" | sed 's/.*revision: //' | cut -c1-8)
-                  changes_detail+="  - revision: $old_rev → $new_rev"$'\n'
-                fi
+            current_plugin=""
+            old_version=""
+            new_version=""
+            old_revision=""
+            new_revision=""
+            old_hash=""
+            new_hash=""
 
-                hash_change=$(echo "$full_output" | sed -n "/\[$plugin_name\]/,/Updated/p" | grep "hash:")
-                if [[ -n "$hash_change" ]]; then
-                  old_hash=$(echo "$hash_change" | grep "^-" | sed 's/.*hash: //' | cut -c1-12)
-                  new_hash=$(echo "$hash_change" | grep "^+" | sed 's/.*hash: //' | cut -c1-12)
-                  changes_detail+="  - hash: $old_hash → $new_hash"$'\n'
-                fi
+            while IFS=: read -r key value; do
+              case $key in
+                "PLUGIN")
+                  current_plugin="$value"
+                  ;;
+                "OLD_VERSION")
+                  old_version="$value"
+                  ;;
+                "NEW_VERSION")
+                  new_version="$value"
+                  ;;
+                "OLD_REVISION")
+                  old_revision="$value"
+                  ;;
+                "NEW_REVISION")
+                  new_revision="$value"
+                  ;;
+                "OLD_HASH")
+                  old_hash="$value"
+                  ;;
+                "NEW_HASH")
+                  new_hash="$value"
+                  ;;
+                "END_PLUGIN")
+                  if [[ -n "$current_plugin" ]]; then
+                    changes_detail+="- $current_plugin: "
+
+                    if [[ -n "$old_version" && -n "$new_version" ]]; then
+                      changes_detail+="$old_version → $new_version"$'\n'
+                    else
+                      changes_detail+="updated to latest revision"$'\n'
+                    fi
+
+                    if [[ -n "$old_revision" && -n "$new_revision" ]]; then
+                      changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
+                    fi
+
+                    if [[ -n "$old_hash" && -n "$new_hash" ]]; then
+                      changes_detail+="  - hash: $old_hash → $new_hash"$'\n'
+                    fi
+
+                    # Reset variables
+                    current_plugin=""
+                    old_version=""
+                    new_version=""
+                    old_revision=""
+                    new_revision=""
+                    old_hash=""
+                    new_hash=""
+                  fi
+                  ;;
+              esac
+            done < /tmp/parsed_changes
+
+            if [[ -n "$current_plugin" ]]; then
+              changes_detail+="- $current_plugin: "
+
+              if [[ -n "$old_version" && -n "$new_version" ]]; then
+                changes_detail+="$old_version → $new_version"$'\n'
+              else
+                changes_detail+="updated to latest revision"$'\n'
               fi
-            done <<< "$(echo "$full_output" | grep "Changes:")"
 
-            plugin_count=$(echo "$changed_plugins" | tr ',' '\n' | wc -l)
+              if [[ -n "$old_revision" && -n "$new_revision" ]]; then
+                changes_detail+="  - revision: $old_revision → $new_revision"$'\n'
+              fi
+
+              if [[ -n "$old_hash" && -n "$new_hash" ]]; then
+                changes_detail+="  - hash: $old_hash → $new_hash"$'\n'
+              fi
+            fi
+
+            plugin_count=$(echo "$changed_plugins" | wc -w)
             if [[ $plugin_count -eq 1 ]]; then
               title="feat: update $changed_plugins plugin"
             else
@@ -78,9 +174,9 @@ jobs:
 
             if [[ -n "$no_change_plugins" ]]; then
               commit_body+=$'\n'"No changes required for:"$'\n'
-              while IFS= read -r plugin; do
+              echo "$no_change_plugins" | while read -r plugin; do
                 commit_body+="- $plugin"$'\n'
-              done <<< "$no_change_plugins"
+              done
             fi
 
             commit_body+=$'\n'"This update was automatically generated by the update-plugins workflow."
@@ -101,17 +197,17 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           assignees: HeitorAugustoLN
-          body: |
-            Automated plugin updates from npins.
-
-            ${{ steps.update.outputs.commit_body }}
-          commit-message: |
-            ${{ steps.update.outputs.title }}
-
-            ${{ steps.update.outputs.commit_body }}
           branch: update-plugins
           delete-branch: true
           labels: dependencies
           reviewers: HeitorAugustoLN
           sign-commits: true
+          commit-message: |
+            ${{ steps.update.outputs.title }}
+
+            ${{ steps.update.outputs.commit_body }}
           title: ${{ steps.update.outputs.title }}
+          body: |
+            Automated plugin updates from npins.
+
+            ${{ steps.update.outputs.commit_body }}
