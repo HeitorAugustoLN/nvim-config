@@ -1,4 +1,4 @@
-name: "Update plugins"
+name: "Update plug"
 
 on:
   push:
