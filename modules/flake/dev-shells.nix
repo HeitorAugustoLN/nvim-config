@@ -1,0 +1,51 @@
+{ inputs, ... }:
+{
+  perSystem =
+    {
+      config,
+      inputs',
+      pkgs,
+      self',
+      system,
+      ...
+    }:
+    {
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = [ inputs.gen-luarc.overlays.default ];
+      };
+
+      devShells =
+        let
+          packages = [ pkgs.npins ];
+        in
+        {
+          default = self'.devShells.stable;
+
+          stable = pkgs.mkShell {
+            packages = packages ++ [ self'.packages.stable.devMode ];
+            shellHook = config.pre-commit.installationScript + ''
+              ln -fs ${
+                pkgs.mk-luarc-json {
+                  lua-version = "jit51";
+                  plugins = config.nexus.optPlugins ++ config.nexus.startPlugins;
+                }
+              } .luarc.json
+            '';
+          };
+
+          nightly = pkgs.mkShell {
+            packages = packages ++ [ self'.packages.nightly.devMode ];
+            shellHook = config.pre-commit.installationScript + ''
+              ln -fs ${
+                pkgs.mk-luarc-json {
+                  lua-version = "jit51";
+                  nvim = inputs'.neovim-nightly-overlay.packages.neovim;
+                  plugins = config.nexus.optPlugins ++ config.nexus.startPlugins;
+                }
+              } .luarc.json
+            '';
+          };
+        };
+    };
+}

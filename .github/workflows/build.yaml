@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build ${{ matrix.package }} on ${{ matrix.system }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        package:
+          - stable
+          - nightly
+        system:
+          - x86_64-linux
+          - x86_64-darwin
+          - aarch64-linux
+          - aarch64-darwin
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-latest
+          - system: x86_64-darwin
+            runner: macos-13
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: aarch64-darwin
+            runner: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v19
+      - name: Build ${{ matrix.package }} neovim
+        run: nix build .#${{ matrix.package }} --system ${{ matrix.system }} --accept-flake-config
