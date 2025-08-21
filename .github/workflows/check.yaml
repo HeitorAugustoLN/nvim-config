@@ -24,7 +24,7 @@ jobs:
             system: aarch64-darwin
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Check Nix flake inputs
         uses: DeterminateSystems/flake-checker-action@v12
       - name: Install Nix
