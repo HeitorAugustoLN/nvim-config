@@ -32,7 +32,7 @@ jobs:
             runner: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
       - name: Build ${{ matrix.package }} neovim
