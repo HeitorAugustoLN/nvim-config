@@ -40,12 +40,10 @@
                 ]
                 ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.wl-clipboard ];
 
-                pluginDependencies = {
-                  snacks = [
-                    pkgs.fd
-                    pkgs.ripgrep
-                  ];
-                };
+                pluginDependencies.snacks = [
+                  pkgs.fd
+                  pkgs.ripgrep
+                ];
               in
               formatters
               ++ languageServers
