@@ -9,7 +9,7 @@ return {
                 }
             end,
             formatters_by_ft = {
-                gdscript = { "gdformat" }
+                gdscript = { "gdformat" },
                 lua = { "stylua" },
                 nix = { "nixfmt" },
             },
