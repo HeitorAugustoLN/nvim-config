@@ -26,6 +26,7 @@
             extraBinPath =
               let
                 formatters = [
+                  pkgs.gdtoolkit_4
                   pkgs.nixfmt
                   pkgs.stylua
                 ];
