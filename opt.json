@@ -56,53 +56,53 @@
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "echasnovski",
+        "owner": "nvim-mini",
         "repo": "mini.ai"
       },
       "branch": "main",
       "submodules": false,
-      "revision": "1cd4f021a05c29acd4ab511c0981da14217daf38",
-      "url": "https://github.com/echasnovski/mini.ai/archive/1cd4f021a05c29acd4ab511c0981da14217daf38.tar.gz",
-      "hash": "045f24n8b3f1ilhhanm1m0sfr0yjprxp5a8ykyjrqc4lwh3v1jwv"
+      "revision": "45a26d032d8703f280c69c2ed9fb4e1bfc8f24f9",
+      "url": "https://github.com/nvim-mini/mini.ai/archive/45a26d032d8703f280c69c2ed9fb4e1bfc8f24f9.tar.gz",
+      "hash": "0q65whb7hw1cill7dkf88m095m27j09ld8zf8rzfvy0xhp64rzlk"
     },
     "mini.icons": {
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "echasnovski",
+        "owner": "nvim-mini",
         "repo": "mini.icons"
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b8f6fa6f5a3fd0c56936252edcd691184e5aac0c",
-      "url": "https://github.com/echasnovski/mini.icons/archive/b8f6fa6f5a3fd0c56936252edcd691184e5aac0c.tar.gz",
-      "hash": "07zlbmisc8c4wj36mdnk7wlwb0qfd38zpjdkqazjzb5lfzh9hf9m"
+      "revision": "f9a177c11daa7829389b7b6eaaec8b8a5c47052d",
+      "url": "https://github.com/nvim-mini/mini.icons/archive/f9a177c11daa7829389b7b6eaaec8b8a5c47052d.tar.gz",
+      "hash": "028zvjc7wyqw51jbj5r5llfkq5223wxga6qwb16ns9s71cflpgh6"
     },
     "mini.statusline": {
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "echasnovski",
+        "owner": "nvim-mini",
         "repo": "mini.statusline"
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f6917f4da995d64edf3728b1302dbd5d4561c912",
-      "url": "https://github.com/echasnovski/mini.statusline/archive/f6917f4da995d64edf3728b1302dbd5d4561c912.tar.gz",
-      "hash": "17jvy7986d0f49cwq233aclwnq0zp8dhjdq3v66iijkg16kdrfq7"
+      "revision": "3c86b8a1cb67e347e91815b21662c28fd52ac144",
+      "url": "https://github.com/nvim-mini/mini.statusline/archive/3c86b8a1cb67e347e91815b21662c28fd52ac144.tar.gz",
+      "hash": "092sl18f2n0wq6wy3jmbb5ap1wpcxj2wn3hv0880mqw1vv9x52pw"
     },
     "mini.surround": {
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "echasnovski",
+        "owner": "nvim-mini",
         "repo": "mini.surround"
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7a8606333affe7ce637a0ba91bbafc46fc42bfa0",
-      "url": "https://github.com/echasnovski/mini.surround/archive/7a8606333affe7ce637a0ba91bbafc46fc42bfa0.tar.gz",
-      "hash": "0znr2s0kq2lvfrgy2232wzhil2x71iv2pqigcfj47c4w0jhz86mc"
+      "revision": "953fb53aa1d0b2ae4506d35fff0e0e7afc8ceb8d",
+      "url": "https://github.com/nvim-mini/mini.surround/archive/953fb53aa1d0b2ae4506d35fff0e0e7afc8ceb8d.tar.gz",
+      "hash": "0g48c5wi0mgpyyi1430dqsb6176vrd87xzgzmm2ibafhq14aqdjs"
     },
     "nvim-lspconfig": {
       "type": "Git",
