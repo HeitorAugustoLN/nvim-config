@@ -21,9 +21,9 @@ jobs:
         id: update
         run: |
           echo "Updating start.json plugins..."
-          start_output=$(nix run nixpkgs#npins -- --lock-file start.json update --full 2>&1)
+          start_output=$(nix run --quiet nixpkgs#npins -- --lock-file start.json update --full 2>&1)
           echo "Updating opt.json plugins..."
-          opt_output=$(nix run nixpkgs#npins -- --lock-file opt.json update --full 2>&1)
+          opt_output=$(nix run --quiet nixpkgs#npins -- --lock-file opt.json update --full 2>&1)
 
           combined_output="Start plugins:\n$start_output\nOpt plugins:\n$opt_output"
 
