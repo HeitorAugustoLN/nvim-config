@@ -130,6 +130,19 @@
       "url": "https://github.com/stevearc/oil.nvim/archive/07f80ad645895af849a597d1cac897059d89b686.tar.gz",
       "hash": "15r6kmpki4blmlv4b49b8rpmjkl05jz03wz98raxq9vvafsxgvzz"
     },
+    "otter.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jmbuhr",
+        "repo": "otter.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "71fec0dc58c3a66078e691b9a77b2516fe3e319b",
+      "url": "https://github.com/jmbuhr/otter.nvim/archive/71fec0dc58c3a66078e691b9a77b2516fe3e319b.tar.gz",
+      "hash": "0sib4n0v18xzzkmqiimih3hnx8v4nf5ybw8y1c8ppb3bma5mz4vd"
+    },
     "snacks.nvim": {
       "type": "Git",
       "repository": {

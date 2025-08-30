@@ -85,6 +85,7 @@
           nightly = inputs.mnw.lib.wrap { inherit pkgs; } (
             commonArgs // { inherit (inputs'.neovim-nightly-overlay.packages) neovim; }
           );
+
           stable = inputs.mnw.lib.wrap { inherit pkgs; } commonArgs;
         };
     };
