@@ -12,6 +12,7 @@ return {
                 gdscript = { "gdformat" },
                 lua = { "stylua" },
                 nix = { "nixfmt" },
+                rust = { "rustfmt" },
             },
         })
     end,
