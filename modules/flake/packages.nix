@@ -11,6 +11,7 @@
     {
       nexus = {
         startPlugins = inputs.mnw.lib.npinsToPlugins pkgs ../../start.json;
+
         optPlugins = [
           pkgs.vimPlugins.blink-cmp
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
@@ -28,12 +29,14 @@
                 formatters = [
                   pkgs.gdtoolkit_4
                   pkgs.nixfmt
+                  pkgs.rustfmt
                   pkgs.stylua
                 ];
 
                 languageServers = [
                   pkgs.lua-language-server
                   pkgs.nixd
+                  pkgs.rust-analyzer
                 ];
 
                 neovimDependencies = [
