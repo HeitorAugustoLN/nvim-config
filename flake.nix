@@ -58,7 +58,6 @@
       type = "github";
       owner = "Gerg-L";
       repo = "mnw";
-      ref = "pull/30/head";
     };
 
     neovim-nightly-overlay = {
