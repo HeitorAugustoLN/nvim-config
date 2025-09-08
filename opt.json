@@ -113,9 +113,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "5f550bbb4d58bb2bfbbed4633fc69c3f0eccaf3a",
-      "url": "https://github.com/neovim/nvim-lspconfig/archive/5f550bbb4d58bb2bfbbed4633fc69c3f0eccaf3a.tar.gz",
-      "hash": "1jzkwvczfiay537anjwkqlqa6jlm6xbnc22crp945bx22smlsjan"
+      "revision": "c8b90ae5cbe21d547b342b05c9266dcb8ca0de8f",
+      "url": "https://github.com/neovim/nvim-lspconfig/archive/c8b90ae5cbe21d547b342b05c9266dcb8ca0de8f.tar.gz",
+      "hash": "1hnkm85j32vqa328kwvfq5xwim0rqcpybvmcj1311yaixlcd4f80"
     },
     "oil.nvim": {
       "type": "Git",
@@ -139,9 +139,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "71fec0dc58c3a66078e691b9a77b2516fe3e319b",
-      "url": "https://github.com/jmbuhr/otter.nvim/archive/71fec0dc58c3a66078e691b9a77b2516fe3e319b.tar.gz",
-      "hash": "0sib4n0v18xzzkmqiimih3hnx8v4nf5ybw8y1c8ppb3bma5mz4vd"
+      "revision": "3ace196b7f784ebef5fb5f3d633b88e3f51e4fb0",
+      "url": "https://github.com/jmbuhr/otter.nvim/archive/3ace196b7f784ebef5fb5f3d633b88e3f51e4fb0.tar.gz",
+      "hash": "1jb708gr0sny1q8s9q2swsgyb9spy7v8sk684n3vwg3p6rjmxr5h"
     },
     "snacks.nvim": {
       "type": "Git",
