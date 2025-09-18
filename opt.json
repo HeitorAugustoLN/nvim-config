@@ -143,6 +143,19 @@
       "url": "https://github.com/jmbuhr/otter.nvim/archive/3ace196b7f784ebef5fb5f3d633b88e3f51e4fb0.tar.gz",
       "hash": "1jb708gr0sny1q8s9q2swsgyb9spy7v8sk684n3vwg3p6rjmxr5h"
     },
+    "showkeys": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvzone",
+        "repo": "showkeys"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",
+      "url": "https://github.com/nvzone/showkeys/archive/cb0a50296f11f1e585acffba8c253b9e8afc1f84.tar.gz",
+      "hash": "1cvgfxvi5l753hn9ijzbb8x9bi2n12gd6n9j8lcvcq9xv43d4zws"
+    },
     "snacks.nvim": {
       "type": "Git",
       "repository": {
