@@ -25,7 +25,7 @@ jobs:
           echo "Updating opt.json plugins..."
           opt_output=$(nix run --quiet nixpkgs#npins -- --lock-file opt.json update --full 2>&1)
 
-          combined_output="Start plugins:\n$start_output\nOpt plugins:\n$opt_output"
+          combined_output="Start plugins:\n$start_output\n\nOptional plugins:\n$opt_output"
 
           echo "output<<EOF" >> $GITHUB_OUTPUT
           echo -e "$combined_output" >> $GITHUB_OUTPUT
