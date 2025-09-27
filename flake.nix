@@ -5,8 +5,14 @@
 
   nixConfig = {
     extra-experimental-features = [ "pipe-operators" ];
-    extra-substituters = [ "https://nix-community.cachix.org" ];
+
+    extra-substituters = [
+      "https://heitor.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+
     extra-trusted-public-keys = [
+      "heitor.cachix.org-1:IZ1ydLh73kFtdv+KfcsR4WGPkn+/I926nTGhk9O9AxI="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
