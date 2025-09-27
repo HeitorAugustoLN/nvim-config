@@ -4,6 +4,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: cron
-      cronjob: '0 0 * * 1' # Runs weekly on monday at 00:00
+      cronjob: "0 0 * * 1" # Runs weekly on monday at 00:00
     commit-message:
       prefix: ci
