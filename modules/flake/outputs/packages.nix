@@ -10,13 +10,13 @@
     }:
     {
       nexus = {
-        startPlugins = inputs.mnw.lib.npinsToPlugins pkgs ../../start.json;
+        startPlugins = inputs.mnw.lib.npinsToPlugins pkgs ../../../start.json;
 
         optPlugins = [
           pkgs.vimPlugins.blink-cmp
           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
         ]
-        ++ inputs.mnw.lib.npinsToPlugins pkgs ../../opt.json;
+        ++ inputs.mnw.lib.npinsToPlugins pkgs ../../../opt.json;
       };
 
       packages =
@@ -55,15 +55,15 @@
               ++ (pluginDependencies |> builtins.attrValues |> lib.flatten)
               |> lib.unique;
 
-            initLua = builtins.readFile ../../init.lua;
+            initLua = builtins.readFile ../../../init.lua;
 
             plugins = {
               dev.config = {
                 pure = lib.fileset.toSource {
-                  root = ../../.;
+                  root = ../../../.;
                   fileset = lib.fileset.unions [
-                    ../../lua
-                    ../../init.lua
+                    ../../../lua
+                    ../../../init.lua
                   ];
                 };
 
