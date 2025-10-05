@@ -27,9 +27,11 @@ jobs:
 
           combined_output="Start plugins:\n$start_output\n\nOptional plugins:\n$opt_output"
 
-          echo "output<<EOF" >> $GITHUB_OUTPUT
-          echo -e "$combined_output" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          {
+            echo "output<<EOF"
+            echo -e "$combined_output"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
