@@ -1,0 +1,5 @@
+std = "neovim"
+
+[lints]
+# Allowed because lz.n uses it
+mixed_table = "allow"

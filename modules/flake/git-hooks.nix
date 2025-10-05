@@ -5,7 +5,7 @@
   perSystem.pre-commit = {
     check.enable = true;
     settings.hooks = {
-      luacheck.enable = true;
+      selene.enable = true;
       treefmt.enable = true;
     };
   };

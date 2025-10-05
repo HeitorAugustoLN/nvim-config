@@ -17,7 +17,12 @@
 
       devShells =
         let
-          packages = [ pkgs.npins ];
+          packages = [
+            pkgs.npins
+            config.pre-commit.settings.package
+          ]
+          ++ config.pre-commit.settings.enabledPackages
+          ++ (builtins.attrValues config.treefmt.build.programs);
         in
         {
           default = self'.devShells.stable;
