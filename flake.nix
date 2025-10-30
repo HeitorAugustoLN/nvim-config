@@ -1,96 +1,103 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  description = "HeitorAugustoLN's personal Neovim configuration";
+  description = "HeitorAugustoLN's personal Neovim configuration made with Nixvim";
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./flake);
 
   nixConfig = {
     extra-experimental-features = [ "pipe-operators" ];
-    extra-substituters = [ "https://heitor.cachix.org" ];
-    extra-trusted-public-keys = [ "heitor.cachix.org-1:IZ1ydLh73kFtdv+KfcsR4WGPkn+/I926nTGhk9O9AxI=" ];
   };
 
   inputs = {
     flake-compat = {
-      type = "github";
       owner = "edolstra";
       repo = "flake-compat";
-    };
-
-    flake-parts = {
       type = "github";
+    };
+    flake-file = {
+      owner = "vic";
+      repo = "flake-file";
+      type = "github";
+    };
+    flake-parts = {
+      inputs = {
+        nixpkgs-lib = {
+          follows = "nixpkgs";
+        };
+      };
       owner = "hercules-ci";
       repo = "flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    gen-luarc = {
       type = "github";
-      owner = "mrcjkb";
-      repo = "nix-gen-luarc-json";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-      };
     };
-
     git-hooks = {
-      type = "github";
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       owner = "cachix";
       repo = "git-hooks.nix";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    import-tree = {
       type = "github";
+    };
+    import-tree = {
       owner = "vic";
       repo = "import-tree";
-    };
-
-    mnw = {
       type = "github";
-      owner = "Gerg-L";
-      repo = "mnw";
     };
-
     neovim-nightly-overlay = {
-      type = "github";
+      inputs = {
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       owner = "nix-community";
       repo = "neovim-nightly-overlay";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        hercules-ci-effects.follows = "";
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
-      };
+      type = "github";
     };
-
     nixpkgs = {
-      type = "github";
       owner = "NixOS";
-      repo = "nixpkgs";
       ref = "nixpkgs-unstable";
-    };
-
-    systems = {
+      repo = "nixpkgs";
       type = "github";
+    };
+    nixvim = {
+      inputs = {
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        systems = {
+          follows = "systems";
+        };
+      };
+      owner = "nix-community";
+      repo = "nixvim";
+      type = "github";
+    };
+    systems = {
       owner = "nix-systems";
       repo = "default";
-    };
-
-    treefmt-nix = {
       type = "github";
+    };
+    treefmt-nix = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       owner = "numtide";
       repo = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      type = "github";
     };
   };
+
 }
