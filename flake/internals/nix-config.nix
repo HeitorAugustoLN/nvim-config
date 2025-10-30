@@ -1,5 +1,1 @@
-{
-  flake-file.nixConfig = {
-    extra-experimental-features = [ "pipe-operators" ];
-  };
-}
+{ flake-file.nixConfig.extra-experimental-features = [ "pipe-operators" ]; }
