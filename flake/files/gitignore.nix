@@ -1,11 +1,7 @@
+{ lib, ... }:
 {
   perSystem =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+    { config, pkgs, ... }:
     {
       files.files = [
         {
