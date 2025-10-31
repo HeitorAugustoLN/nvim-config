@@ -2,6 +2,7 @@
   perSystem =
     {
       config,
+      lib,
       pkgs,
       self',
       ...
@@ -9,12 +10,14 @@
     {
       devShells =
         let
-          packages = [
-            config.pre-commit.settings.package
-            pkgs.just
-          ]
-          ++ config.pre-commit.settings.enabledPackages
-          ++ (builtins.attrValues config.treefmt.build.programs);
+          packages =
+            [
+              config.pre-commit.settings.package
+              pkgs.just
+            ]
+            ++ config.pre-commit.settings.enabledPackages
+            ++ (builtins.attrValues config.treefmt.build.programs)
+            |> lib.unique;
 
           shellHook = config.pre-commit.installationScript;
         in

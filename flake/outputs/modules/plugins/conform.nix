@@ -17,8 +17,6 @@
               return { timeout_ms = 500, lsp_format = "fallback" }
             end
           '';
-
-          settings.formatters_by_ft = { };
         };
 
         lz-n.keymaps = [

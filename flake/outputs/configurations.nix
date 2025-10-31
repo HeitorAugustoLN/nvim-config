@@ -50,7 +50,7 @@
               clipboard-providers
               diagnostics
               leader
-              line-numbers
+              options
             ]
             ++ languages
             ++ plugins;
