@@ -14,7 +14,6 @@
     just.enable = true;
     keep-sorted.enable = true;
     nixfmt.enable = true;
-    prettier.enable = true;
     statix.enable = true;
   };
 }
