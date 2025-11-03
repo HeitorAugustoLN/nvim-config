@@ -9,9 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8c4125e3c746976ba025dc5d908fa22c6aa09486",
-      "url": "https://github.com/catppuccin/nvim/archive/8c4125e3c746976ba025dc5d908fa22c6aa09486.tar.gz",
-      "hash": "0gfsia8p9si1wh3430rl5pklw48c0h3zmx6q5bkvm1ajidndfgrp"
+      "revision": "234fc048de931a0e42ebcad675bf6559d75e23df",
+      "url": "https://github.com/catppuccin/nvim/archive/234fc048de931a0e42ebcad675bf6559d75e23df.tar.gz",
+      "hash": "0m6lg9fifx6izj6572jp0a5klmdly019hg2parvlqfyxwlksxlsq"
     },
     "conform.nvim": {
       "type": "Git",
@@ -22,9 +22,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9fd3d5e0b689ec1bf400c53cbbec72c6fdf24081",
-      "url": "https://github.com/stevearc/conform.nvim/archive/9fd3d5e0b689ec1bf400c53cbbec72c6fdf24081.tar.gz",
-      "hash": "1igspxqkqqv9f1fqh0sf6dlap1p8an8jl167a93v33c8ig2h6if9"
+      "revision": "02736cf359a3235c6d7d601a2f6bdc909e557513",
+      "url": "https://github.com/stevearc/conform.nvim/archive/02736cf359a3235c6d7d601a2f6bdc909e557513.tar.gz",
+      "hash": "1ps8hkkm64hdbym45jazfcf25dsxjq03r7n3z39x1zwaxb1hnlk9"
     },
     "fidget.nvim": {
       "type": "Git",
@@ -100,9 +100,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "444e155147e2b5159dd28a65f9736254c16cb817",
-      "url": "https://github.com/nvim-mini/mini.surround/archive/444e155147e2b5159dd28a65f9736254c16cb817.tar.gz",
-      "hash": "1b34pvaipvqwsb2kngzv5zvqrdmbr4q9v29qh1rwg80byifi33f4"
+      "revision": "da5a221b4317c52447df6d9c18610d19b88ea0f4",
+      "url": "https://github.com/nvim-mini/mini.surround/archive/da5a221b4317c52447df6d9c18610d19b88ea0f4.tar.gz",
+      "hash": "1h02imc51jcf5l68s7s3siarb6gy6dsw5jw0r0w5sfd6hz8183a9"
     },
     "nvim-lspconfig": {
       "type": "Git",
@@ -113,9 +113,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "a9b2fb560c4ab22c10728fd5149dbd7b62aa4f69",
-      "url": "https://github.com/neovim/nvim-lspconfig/archive/a9b2fb560c4ab22c10728fd5149dbd7b62aa4f69.tar.gz",
-      "hash": "1fc911w9c0z7ljf9av7ynz2sgbxjqadz3sr7f94p09l8xfd6igzy"
+      "revision": "a89bfcfd0e44f898341ac8a80ba83ccf6218bef3",
+      "url": "https://github.com/neovim/nvim-lspconfig/archive/a89bfcfd0e44f898341ac8a80ba83ccf6218bef3.tar.gz",
+      "hash": "1mb5bizfwyb0cdf2jz5xg9yl92xy0sklb4v2akgmzy42hmz4h735"
     },
     "oil.nvim": {
       "type": "Git",
@@ -165,9 +165,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ecde81fc0ce7c4834def0ce710dd5dc62b0822fc",
-      "url": "https://github.com/folke/snacks.nvim/archive/ecde81fc0ce7c4834def0ce710dd5dc62b0822fc.tar.gz",
-      "hash": "1xdbvwm64xs9kn484622khnfr105xajpljfp07z1dnypm3n8x8p4"
+      "revision": "bd3c1a071483c943ce98723ef7ac79fda0c7ee16",
+      "url": "https://github.com/folke/snacks.nvim/archive/bd3c1a071483c943ce98723ef7ac79fda0c7ee16.tar.gz",
+      "hash": "059ryzkkn132dssxkrlgv4bd347ab5f30js0cb05gzzf66vwn6xw"
     },
     "todo-comments.nvim": {
       "type": "Git",
@@ -178,9 +178,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "19d461ddd543e938eb22505fb03fa878800270b6",
-      "url": "https://github.com/folke/todo-comments.nvim/archive/19d461ddd543e938eb22505fb03fa878800270b6.tar.gz",
-      "hash": "1kpzji8al0dsxcilh3jkndxsfgnhm5nclw36hkgly5ksslnpg8s2"
+      "revision": "411503d3bedeff88484de572f2509c248e499b38",
+      "url": "https://github.com/folke/todo-comments.nvim/archive/411503d3bedeff88484de572f2509c248e499b38.tar.gz",
+      "hash": "1cvijn65ashf7vlcl47b6f56gjkjdkxzag34w4lljg0q5bzyfkjl"
     },
     "which-key.nvim": {
       "type": "Git",
@@ -191,9 +191,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b4177e3eaf15fe5eb8357ebac2286d488be1ed00",
-      "url": "https://github.com/folke/which-key.nvim/archive/b4177e3eaf15fe5eb8357ebac2286d488be1ed00.tar.gz",
-      "hash": "05g22fvbi7yhjnq16cszryc1aqs68v9mcrwgaa9xz0glj9bpwz9p"
+      "revision": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "url": "https://github.com/folke/which-key.nvim/archive/3aab2147e74890957785941f0c1ad87d0a44c15a.tar.gz",
+      "hash": "1dwri7gxqgb58pfy829s0ns709m0nrcj1cgz2wj1k09qfffri9mc"
     }
   },
   "version": 5
