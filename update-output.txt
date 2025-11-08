@@ -1,0 +1,36 @@
+unpacking 'github:edolstra/flake-compat/f387cd2afec9419c8ee37694406ca490c3f34ee5' into the Git cache...
+unpacking 'github:hercules-ci/flake-parts/26d05891e14c88eb4a5d5bee659c0db5afb609d8' into the Git cache...
+unpacking 'github:cachix/git-hooks.nix/8e7576e79b88c16d7ee3bbd112c8d90070832885' into the Git cache...
+unpacking 'github:vic/import-tree/90fa129798be99cde036b78658e89475710966a1' into the Git cache...
+unpacking 'github:nix-community/neovim-nightly-overlay/fbc6a67d4bdc7ef09a17e985109c5cb1ed287ed6' into the Git cache...
+unpacking 'github:NixOS/nixpkgs/ffcdcf99d65c61956d882df249a9be53e5902ea5' into the Git cache...
+unpacking 'github:nix-community/nixvim/d4b798a469248aa2b0bba4508bd8f97837566885' into the Git cache...
+unpacking 'github:nix-systems/default/da67096a3b9bf56a91d16901293e51ba5b49a27e' into the Git cache...
+unpacking 'github:numtide/treefmt-nix/97a30861b13c3731a84e09405414398fbf3e109f' into the Git cache...
+warning: updating lock file "/home/runner/work/nvim-config/nvim-config/flake.lock":
+• Updated input 'neovim-nightly-overlay':
+    'github:nix-community/neovim-nightly-overlay/e908e40b31632fc2bcda917dadee8c3ab8b46167?narHash=sha256-bTi/KZFGl88ZpZFTHbCXsONBp8TsjSQhymVmMpEvfQM%3D' (2025-11-06)
+  → 'github:nix-community/neovim-nightly-overlay/fbc6a67d4bdc7ef09a17e985109c5cb1ed287ed6?narHash=sha256-xmXc/A187ItfvHQjaJUL1ciiunIsrRkWknZwcgl2s8I%3D' (2025-11-08)
+• Updated input 'neovim-nightly-overlay/neovim-src':
+    'github:neovim/neovim/0472119fe61a50e56382ccdd42fb8324c1f0ab44?narHash=sha256-MSZ3hjsnQnrkG1LokD5wSH8S%2B5A7evMEP1Nx%2Biu8YZQ%3D' (2025-11-05)
+  → 'github:neovim/neovim/af5ac171bde3ae7f961a23e9464309cee7ef9c13?narHash=sha256-z2lLrDK3WRgGS9LA4KEQRgYxnZiVXh%2Bbdg09puaBfk4%3D' (2025-11-07)
+• Updated input 'nixvim':
+    'github:nix-community/nixvim/d01e1c17e2690c10d3aa6abea28838befa1fd449?narHash=sha256-qEI9AkUwOHtM5A2yDBy0K%2BUHGLfYir81dFiTN0DXBeU%3D' (2025-11-06)
+  → 'github:nix-community/nixvim/d4b798a469248aa2b0bba4508bd8f97837566885?narHash=sha256-TUYm7Ihtl8472GPTbj/cQWUJeDNQ4a9kuz93wkEIE8M%3D' (2025-11-08)
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <runner@runnervmw9dnm.vxfomqik20yuxhzuwdk2y3se5e.cx.internal.cloudapp.net>) not allowed
+error:
+       … while updating the lock file of flake 'git+file:///home/runner/work/nvim-config/nvim-config?ref=refs/heads/dendritic-nixvim&rev=5650dcf54d8ebb990471febbe912f15f421f995f&shallow=1'
+
+       error: program 'git' failed with exit code 128
