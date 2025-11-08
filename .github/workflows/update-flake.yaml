@@ -19,7 +19,7 @@ jobs:
       - name: Update flake inputs
         id: update
         run: |
-          nix flake update 2>&1 | tee update-output.txt
+          nix flake update --accept-flake-config 2>&1 | tee update-output.txt
           {
             echo "output<<EOF"
             cat update-output.txt
@@ -27,7 +27,65 @@ jobs:
           } >> "$GITHUB_OUTPUT"
       - name: Generate update summary
         id: summary
-        run: "# Check if there are changes\nif git diff --exit-code flake.lock > /dev/null 2>&1; then\n  echo \"has_changes=false\" >> \"$GITHUB_OUTPUT\"\n  exit 0\nfi\n\necho \"has_changes=true\" >> \"$GITHUB_OUTPUT\"\n\n# Build summary with table\n{\n  echo \"## Flake Input Updates\"\n  echo \"\"\n  echo \"| Input | Diff |\"\n  echo \"|-------|------|\"\n} > summary.md\n\n# Parse flake.lock for changes\npython3 <<'PYTHON' >> summary.md\nimport json\nimport subprocess\n\n# Get old lock\nold_lock = json.loads(subprocess.check_output(['git', 'show', 'HEAD:flake.lock']))\n# Get new lock\nwith open('flake.lock') as f:\n    new_lock = json.load(f)\n\nfor node_name, node_data in new_lock['nodes'].items():\n    if node_name == 'root':\n        continue\n    \n    old_node = old_lock['nodes'].get(node_name, {})\n    old_locked = old_node.get('locked', {})\n    new_locked = node_data.get('locked', {})\n    \n    old_rev = old_locked.get('rev')\n    new_rev = new_locked.get('rev')\n    \n    if old_rev and new_rev and old_rev != new_rev:\n        owner = new_locked.get('owner')\n        repo = new_locked.get('repo')\n        \n        if owner and repo:\n            link = f\"https://github.com/{owner}/{repo}/compare/{old_rev}...{new_rev}\"\n            print(f\"| `{node_name}` | [`{old_rev[:7]}...{new_rev[:7]}`]({link}) |\")\nPYTHON\n\ncat summary.md >> \"$GITHUB_STEP_SUMMARY\"\n\n{\n  echo \"body<<EOF\"\n  cat summary.md\n  echo \"\"\n  echo '```'\n  cat update-output.txt\n  echo '```'\n  echo \"EOF\"\n} >> \"$GITHUB_OUTPUT\"\n"
+        run: |
+          # Check if there are changes
+          if git diff --exit-code flake.lock > /dev/null 2>&1; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+
+          # Build summary with table
+          {
+            echo "## Flake Input Updates"
+            echo ""
+            echo "| Input | Diff |"
+            echo "|-------|------|"
+          } > summary.md
+
+          # Parse flake.lock for changes
+          python3 <<'PYTHON' >> summary.md
+          import json
+          import subprocess
+
+          # Get old lock
+          old_lock = json.loads(subprocess.check_output(['git', 'show', 'HEAD:flake.lock']))
+          # Get new lock
+          with open('flake.lock') as f:
+              new_lock = json.load(f)
+
+          for node_name, node_data in new_lock['nodes'].items():
+              if node_name == 'root':
+                  continue
+
+              old_node = old_lock['nodes'].get(node_name, {})
+              old_locked = old_node.get('locked', {})
+              new_locked = node_data.get('locked', {})
+
+              old_rev = old_locked.get('rev')
+              new_rev = new_locked.get('rev')
+
+              if old_rev and new_rev and old_rev != new_rev:
+                  owner = new_locked.get('owner')
+                  repo = new_locked.get('repo')
+
+                  if owner and repo:
+                      link = f"https://github.com/{owner}/{repo}/compare/{old_rev}...{new_rev}"
+                      print(f"| `{node_name}` | [`{old_rev[:7]}...{new_rev[:7]}`]({link}) |")
+          PYTHON
+
+          cat summary.md >> "$GITHUB_STEP_SUMMARY"
+
+          {
+            echo "body<<EOF"
+            cat summary.md
+            echo ""
+            echo '```'
+            cat update-output.txt
+            echo '```'
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
       - name: Create pull request
         if: steps.summary.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v7
