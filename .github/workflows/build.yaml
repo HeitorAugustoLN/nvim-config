@@ -16,7 +16,7 @@ jobs:
           - nightly
           - stable
         include:
-          - runner: macos-14
+          - runner: macos-latest
             system: aarch64-darwin
           - runner: ubuntu-24.04-arm
             system: aarch64-linux
