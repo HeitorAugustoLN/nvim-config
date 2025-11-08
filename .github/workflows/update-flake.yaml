@@ -23,31 +23,29 @@ jobs:
       - name: Update flake inputs
         id: update
         run: |
-          nix flake update --accept-flake-config --commit-lock-file
+          nix flake update --accept-flake-config --commit-lock-file --option commit-lockfile-summary "chore: update flake inputs"
       - name: Generate update summary
         id: summary
         run: |
           # Check if there are changes
-          if ! git log -1 --pretty=%B | grep -q "^Flake lock file updates:"; then
+          if ! git log -1 --pretty=%B | grep -q "^chore: update flake inputs"; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-          # Get commit message (contains the updates)
-          COMMIT_MSG=$(git log -1 --pretty=%B)
+          # Get commit body (without first line which is the summary)
+          COMMIT_BODY=$(git log -1 --pretty=%B | tail -n +2)
 
-          # Build summary with table
+          # Build PR body with table
           {
-            echo "## Flake Input Updates"
-            echo ""
             echo "| Input | Diff |"
             echo "|-------|------|"
-          } > summary.md
+          } > pr_body.txt
 
           # Parse flake.lock for changes
-          python3 <<'PYTHON' >> summary.md
+          python3 <<'PYTHON' >> pr_body.txt
           import json
           import subprocess
 
@@ -76,14 +74,12 @@ jobs:
                       print(f"| `{node_name}` | [`{old_rev[:7]}...{new_rev[:7]}`]({link}) |")
           PYTHON
 
-          cat summary.md >> "$GITHUB_STEP_SUMMARY"
-
           {
             echo "body<<EOF"
-            cat summary.md
+            cat pr_body.txt
             echo ""
             echo '```'
-            echo "$COMMIT_MSG"
+            echo "$COMMIT_BODY"
             echo '```'
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
