@@ -1,0 +1,43 @@
+name: Update flake inputs
+run-name: Update flake inputs by ${{ github.actor }}
+on:
+  schedule:
+    - cron: '0 0 */3 * *' # Every 3 days at midnight UTC
+  workflow_dispatch:
+jobs:
+  update:
+    name: Update flake inputs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v31
+      - name: Update flake inputs
+        id: update
+        run: |
+          nix flake update 2>&1 | tee update-output.txt
+          {
+            echo "output<<EOF"
+            cat update-output.txt
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+      - name: Generate update summary
+        id: summary
+        run: "# Check if there are changes\nif git diff --exit-code flake.lock > /dev/null 2>&1; then\n  echo \"has_changes=false\" >> \"$GITHUB_OUTPUT\"\n  exit 0\nfi\n\necho \"has_changes=true\" >> \"$GITHUB_OUTPUT\"\n\n# Build summary with table\n{\n  echo \"## Flake Input Updates\"\n  echo \"\"\n  echo \"| Input | Diff |\"\n  echo \"|-------|------|\"\n} > summary.md\n\n# Parse flake.lock for changes\npython3 <<'PYTHON' >> summary.md\nimport json\nimport subprocess\n\n# Get old lock\nold_lock = json.loads(subprocess.check_output(['git', 'show', 'HEAD:flake.lock']))\n# Get new lock\nwith open('flake.lock') as f:\n    new_lock = json.load(f)\n\nfor node_name, node_data in new_lock['nodes'].items():\n    if node_name == 'root':\n        continue\n    \n    old_node = old_lock['nodes'].get(node_name, {})\n    old_locked = old_node.get('locked', {})\n    new_locked = node_data.get('locked', {})\n    \n    old_rev = old_locked.get('rev')\n    new_rev = new_locked.get('rev')\n    \n    if old_rev and new_rev and old_rev != new_rev:\n        owner = new_locked.get('owner')\n        repo = new_locked.get('repo')\n        \n        if owner and repo:\n            link = f\"https://github.com/{owner}/{repo}/compare/{old_rev}...{new_rev}\"\n            print(f\"| `{node_name}` | [`{old_rev[:7]}...{new_rev[:7]}`]({link}) |\")\nPYTHON\n\ncat summary.md >> \"$GITHUB_STEP_SUMMARY\"\n\n{\n  echo \"body<<EOF\"\n  cat summary.md\n  echo \"\"\n  echo '```'\n  cat update-output.txt\n  echo '```'\n  echo \"EOF\"\n} >> \"$GITHUB_OUTPUT\"\n"
+      - name: Create pull request
+        if: steps.summary.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: |
+            chore: update flake inputs
+
+            ${{ steps.update.outputs.output }}
+          title: "chore: update flake inputs"
+          body: ${{ steps.summary.outputs.body }}
+          branch: update-flake-inputs
+          delete-branch: true
+          labels: dependencies
