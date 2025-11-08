@@ -1,5 +1,5 @@
-name: Flake check
-run-name: Flake check for ${{ github.ref_name }} by ${{ github.actor }}
+name: Build
+run-name: Build for ${{ github.ref_name }} by ${{ github.actor }}
 on:
   pull_request:
   push:
@@ -7,13 +7,16 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  check:
-    name: Check flake on ${{ matrix.system }}
+  build:
+    name: Build ${{ matrix.package }} on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
+        package:
+          - nightly
+          - stable
         include:
-          - runner: macos-latest
+          - runner: macos-14
             system: aarch64-darwin
           - runner: ubuntu-24.04-arm
             system: aarch64-linux
@@ -24,8 +27,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-      - name: Check flake inputs
-        uses: DeterminateSystems/flake-checker-action@v12
       - name: Set up Nix
         uses: cachix/install-nix-action@v31
       - name: Set up Cachix
@@ -33,5 +34,5 @@ jobs:
         with:
           name: heitor
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Run flake check
-        run: nix flake check --accept-flake-config
+      - name: Build flake package
+        run: nix build .#${{ matrix.package }} --accept-flake-config

@@ -1,26 +1,27 @@
+# List all available recipes.
 default:
     @just --list
 
-# Build the neovim configuration
+# Build a flake output.
 build *args:
     @nix build {{ args }}
 
-# Enter the development shell
+# Enter a development shell.
 dev *args:
     @nix develop {{ args }}
 
-# Run checks
+# Run flake checks.
 check *args:
     @nix flake check {{ args }}
 
-# Format the code
+# Format the code.
 fmt:
     @nix fmt
 
-# Update flake inputs
+# Update flake inputs.
 update:
     @nix flake update
 
-# Clean the project
+# Clean the project.
 clean:
-    @rm -rf result*
+    @rm -f result*
