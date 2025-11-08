@@ -16,18 +16,22 @@
             let
               languages = with self.modules.nixvim; [
                 godot
+                lua
                 nix
               ];
 
               plugins = with self.modules.nixvim; [
                 blink-cmp
                 conform
+                dap
+                lint
                 lspconfig
                 lz-n
                 mini-ai
                 mini-icons
                 mini-surround
                 oil
+                otter
                 showkeys
                 treesitter
                 vague
@@ -42,6 +46,7 @@
               highlightYank
               leader
               lineNumberToggle
+              luaLoader
               options
             ]
             ++ languages

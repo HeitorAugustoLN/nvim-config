@@ -1,12 +1,17 @@
 {
   flake.modules.nixvim.options = {
     opts = {
+      cursorline = true;
+      ignorecase = true;
+      mouse = "a";
       number = true;
       relativenumber = true;
-      mouse = "a";
-      ignorecase = true;
       signcolumn = "yes";
       smartcase = true;
+      splitbelow = true;
+      splitkeep = "screen";
+      splitright = true;
+      undofile = true;
     };
   };
 }

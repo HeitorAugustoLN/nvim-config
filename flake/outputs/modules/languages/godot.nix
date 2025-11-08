@@ -2,6 +2,8 @@
   flake.modules.nixvim.godot =
     { pkgs, ... }:
     {
+      extraPackages = [ pkgs.gdtoolkit_4 ];
+
       lsp.servers.gdscript.enable = true;
 
       plugins = {
@@ -11,7 +13,7 @@
         };
 
         dap = {
-          adapters.servers = {
+          adapters.servers.godot = {
             host = "127.0.0.1";
             port = 6006;
           };
@@ -26,6 +28,8 @@
           ];
         };
 
+        lint.lintersByFt.gdscript = [ "gdlint" ];
+
         treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
           gdscript
           gdshader
@@ -34,6 +38,7 @@
       };
 
       extraConfigLua = ''
+        ---@diagnostic disable: undefined-global
         local function get_godot_project_root()
           local current_file = vim.fn.expand("%:p")
           local search_dir = vim.fn.fnamemodify(current_file, ":h")
