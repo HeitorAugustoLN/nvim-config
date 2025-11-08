@@ -1,32 +1,32 @@
+name: Flake check
+run-name: Flake check for ${{ github.ref_name }} by ${{ github.actor }}
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
   check:
     name: Check flake on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v5
-    - name: Check flake inputs
-      uses: DeterminateSystems/flake-checker-action@v12
-    - name: Set up Nix
-      uses: cachix/install-nix-action@v31
-    - name: Run flake check
-      run: nix flake check --accept-flake-config
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Check flake inputs
+        uses: DeterminateSystems/flake-checker-action@v12
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v31
+      - name: Run flake check
+        run: nix flake check --accept-flake-config
     strategy:
       matrix:
         include:
-        - runner: macos-14
-          system: aarch64-darwin
-        - runner: ubuntu-24.04-arm
-          system: aarch64-linux
-        - runner: macos-15-intel
-          system: x86_64-darwin
-        - runner: ubuntu-latest
-          system: x86_64-linux
-name: Flake check
-'on':
-  pull_request: null
-  push:
-    branches:
-    - main
-  workflow_dispatch: null
-run-name: Flake check for ${{ github.ref_name }} by ${{ github.actor }}
+          - runner: macos-14
+            system: aarch64-darwin
+          - runner: ubuntu-24.04-arm
+            system: aarch64-linux
+          - runner: macos-15-intel
+            system: x86_64-darwin
+          - runner: ubuntu-latest
+            system: x86_64-linux

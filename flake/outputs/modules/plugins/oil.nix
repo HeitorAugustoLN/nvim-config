@@ -26,7 +26,7 @@
                 local hidden_patterns = {
                   -- Development directories
                   "^%.direnv",
-                  "^%.git",
+                  "^%.git$",
 
                   -- Godot files
                   "^server%.pipe$",
