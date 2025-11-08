@@ -38,14 +38,14 @@ jobs:
           # Get commit body (without first line which is the summary)
           COMMIT_BODY=$(git log -1 --pretty=%B | tail -n +2)
 
-          # Build PR body with table
+          # Build PR body directly in output
           {
+            echo "body<<EOF"
             echo "| Input | Diff |"
             echo "|-------|------|"
-          } > pr_body.txt
 
-          # Parse flake.lock for changes
-          python3 <<'PYTHON' >> pr_body.txt
+            # Parse flake.lock for changes and append to output
+            python3 <<'PYTHON'
           import json
           import subprocess
 
@@ -74,9 +74,6 @@ jobs:
                       print(f"| `{node_name}` | [`{old_rev[:7]}...{new_rev[:7]}`]({link}) |")
           PYTHON
 
-          {
-            echo "body<<EOF"
-            cat pr_body.txt
             echo ""
             echo '```'
             echo "$COMMIT_BODY"
@@ -92,3 +89,6 @@ jobs:
           branch: update-flake-inputs
           delete-branch: true
           labels: dependencies
+          add-paths: flake.lock
+          commit-message: skip
+          sign-commits: true
