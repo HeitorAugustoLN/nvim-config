@@ -1,6 +1,6 @@
 {
   flake.modules.nixvim.conform =
-    { lib, ... }:
+    { config, lib, ... }:
     {
       plugins = {
         conform-nvim = {
@@ -21,7 +21,7 @@
 
         lz-n.keymaps = [
           {
-            plugin = "conform.nvim";
+            plugin = lib.getName config.plugins.conform-nvim.package;
             key = "<leader>f";
             action = lib.nixvim.mkRaw ''
               function()

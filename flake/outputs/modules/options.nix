@@ -5,6 +5,7 @@
       relativenumber = true;
       mouse = "a";
       ignorecase = true;
+      signcolumn = "yes";
       smartcase = true;
     };
   };

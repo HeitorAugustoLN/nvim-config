@@ -1,17 +1,5 @@
 { inputs, self, ... }:
 {
-  flake-file.inputs.nixvim = {
-    type = "github";
-    owner = "nix-community";
-    repo = "nixvim";
-
-    inputs = {
-      flake-parts.follows = "flake-parts";
-      nixpkgs.follows = "nixpkgs";
-      systems.follows = "systems";
-    };
-  };
-
   imports = [ inputs.nixvim.flakeModules.default ];
 
   nixvim = {
@@ -27,13 +15,12 @@
           modules =
             let
               languages = with self.modules.nixvim; [
-                gdscript
+                godot
                 nix
               ];
 
               plugins = with self.modules.nixvim; [
                 blink-cmp
-                catppuccin
                 conform
                 lspconfig
                 lz-n
@@ -43,13 +30,18 @@
                 oil
                 showkeys
                 treesitter
+                vague
               ];
             in
             with self.modules.nixvim;
             [
-              clipboard-providers
+              byteCompileLua
+              combinePlugins
+              clipboard
               diagnostics
+              highlightYank
               leader
+              lineNumberToggle
               options
             ]
             ++ languages
