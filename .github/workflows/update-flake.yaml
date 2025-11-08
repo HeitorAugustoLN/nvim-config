@@ -19,7 +19,7 @@ jobs:
       - name: Update flake inputs
         id: update
         run: |
-          nix flake update --accept-flake-config 2>&1 | tee update-output.txt
+          nix flake update --accept-flake-config --commit-lock-file 2>&1 | tee update-output.txt
           {
             echo "output<<EOF"
             cat update-output.txt
