@@ -12,18 +12,23 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
+        system:
+          - aarch64-darwin
+          - aarch64-linux
+          - x86_64-darwin
+          - x86_64-linux
         package:
           - nightly
           - stable
         include:
-          - runner: macos-latest
-            system: aarch64-darwin
-          - runner: ubuntu-24.04-arm
-            system: aarch64-linux
-          - runner: macos-15-intel
-            system: x86_64-darwin
-          - runner: ubuntu-latest
-            system: x86_64-linux
+          - system: aarch64-darwin
+            runner: macos-14
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: x86_64-darwin
+            runner: macos-15-intel
+          - system: x86_64-linux
+            runner: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
