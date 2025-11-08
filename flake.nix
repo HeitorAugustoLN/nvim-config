@@ -10,6 +10,7 @@
   };
 
   inputs = {
+    # keep-sorted start block=yes newline_separated=yes
     flake-compat = {
       type = "github";
       owner = "edolstra";
@@ -71,9 +72,9 @@
     };
 
     systems = {
+      type = "github";
       owner = "nix-systems";
       repo = "default";
-      type = "github";
     };
 
     treefmt-nix = {
@@ -82,5 +83,6 @@
       repo = "treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # keep-sorted end
   };
 }
