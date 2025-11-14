@@ -1,34 +1,37 @@
-name: "Update flake"
-
-on:
-  workflow_dispatch:
+---
+name: Update flake inputs
+run-name: Update flake inputs by ${{ github.actor }}
+"on":
   schedule:
-    - cron: "0 0 * * 1" # Runs weekly on monday at 00:00
-
+    - cron: "0 0 */3 * *"  # Every 3 days at midnight UTC
+  workflow_dispatch:
 jobs:
   update-flake:
-    name: Update flake
+    name: Update flake inputs
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6
+        with:
+          persist-credentials: false
+      - name: Set up Nix
+        uses: cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd  # v31
       - name: Update flake.lock
-        id: update-flake-lock
-        uses: DeterminateSystems/update-flake-lock@v27
+        id: update
+        uses: DeterminateSystems/update-flake-lock@c5930b397a673a70ca70be06020e943aeac310a1  # v27
         with:
-          commit-msg: "chore(deps): update flake.lock"
-          pr-assignees: HeitorAugustoLN
-          pr-labels: dependencies
-          pr-reviewers: HeitorAugustoLN
-          pr-title: "chore(deps): update flake.lock"
-          # Wait for DeterminateSystems/update-flake-lock#200
-          # sign-commits: true
-      - name: Comment flake.lock changelog
-        uses: mdarocha/comment-flake-lock-changelog@v0.9.2
-        with:
-          pull-request-number: ${{ steps.update-flake-lock.outputs.pull-request-number }}
+          commit-msg: "chore(deps): update flake inputs"
+          pr-labels: |
+            dependencies
+            nix
+          pr-title: "chore(deps): update flake inputs"
+      - name: Enable auto-merge
+        if: steps.update.outputs.pull-request-url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.update.outputs.pull-request-url }}
+        run: gh pr merge --auto --squash "$PR_URL"

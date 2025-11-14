@@ -1,44 +1,127 @@
+---
 name: Build
-
-on:
-  workflow_dispatch:
+run-name: Build for ${{ github.ref_name }} by ${{ github.actor }}
+"on":
   pull_request:
   push:
     branches:
       - main
-
+  workflow_dispatch:
 jobs:
-  build:
+  build-packages:
     name: Build ${{ matrix.package }} on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    timeout-minutes: 30
     strategy:
       matrix:
         package:
-          - stable
           - nightly
+          - stable
         system:
-          - x86_64-linux
-          - x86_64-darwin
-          - aarch64-linux
           - aarch64-darwin
+          - aarch64-linux
+          - x86_64-darwin
+          - x86_64-linux
         include:
-          - system: x86_64-linux
-            runner: ubuntu-latest
-          - system: x86_64-darwin
-            runner: macos-13
-          - system: aarch64-linux
-            runner: ubuntu-24.04-arm
           - system: aarch64-darwin
             runner: macos-latest
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: x86_64-darwin
+            runner: macos-15-intel
+          - system: x86_64-linux
+            runner: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
-      - name: Set up binary cache
-        uses: cachix/cachix-action@v16
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6
+        with:
+          persist-credentials: false
+      - name: Set up Nix
+        uses: cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd  # v31
+      - name: Set up Cachix
+        uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad  # v16
         with:
           name: heitor
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - name: Build ${{ matrix.package }} neovim
-        run: nix build .#${{ matrix.package }} --system ${{ matrix.system }} --accept-flake-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build package
+        run: nix build .#${{ matrix.package }} --accept-flake-config
+  build-dev-shells:
+    needs: build-packages
+    name: Build devShell for ${{ matrix.package }} on ${{ matrix.system }}
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        package:
+          - nightly
+          - stable
+        system:
+          - aarch64-darwin
+          - aarch64-linux
+          - x86_64-darwin
+          - x86_64-linux
+        include:
+          - system: aarch64-darwin
+            runner: macos-latest
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: x86_64-darwin
+            runner: macos-15-intel
+          - system: x86_64-linux
+            runner: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6
+        with:
+          persist-credentials: false
+      - name: Set up Nix
+        uses: cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd  # v31
+      - name: Set up Cachix
+        uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad  # v16
+        with:
+          name: heitor
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build devShell
+        run: |
+          nix build .#devShells.${{ matrix.system }}.${{ matrix.package }} \
+            --accept-flake-config
+  build-formatter:
+    name: Build formatter on ${{ matrix.system }}
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        system:
+          - aarch64-darwin
+          - aarch64-linux
+          - x86_64-darwin
+          - x86_64-linux
+        include:
+          - system: aarch64-darwin
+            runner: macos-latest
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: x86_64-darwin
+            runner: macos-15-intel
+          - system: x86_64-linux
+            runner: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6
+        with:
+          persist-credentials: false
+      - name: Set up Nix
+        uses: cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd  # v31
+      - name: Set up Cachix
+        uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad  # v16
+        with:
+          name: heitor
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build formatter
+        run: nix build .#formatter.${{ matrix.system }} --accept-flake-config
