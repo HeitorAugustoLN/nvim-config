@@ -5,6 +5,7 @@
         enable = true;
         current_line = true;
       };
+
       virtual_text = {
         enable = true;
         current_line = false;

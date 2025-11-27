@@ -3,7 +3,6 @@
     { pkgs, ... }:
     {
       extraPackages = [ pkgs.markdownlint-cli2 ];
-
       lsp.servers.marksman.enable = true;
 
       plugins = {

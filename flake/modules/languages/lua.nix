@@ -3,7 +3,6 @@
     { pkgs, ... }:
     {
       extraPackages = [ pkgs.selene ];
-
       lsp.servers.lua_ls.enable = true;
 
       plugins = {

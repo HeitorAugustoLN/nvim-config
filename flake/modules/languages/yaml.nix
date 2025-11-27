@@ -3,7 +3,6 @@
     { pkgs, ... }:
     {
       extraPackages = [ pkgs.yamllint ];
-
       lsp.servers.yamlls.enable = true;
 
       plugins = {

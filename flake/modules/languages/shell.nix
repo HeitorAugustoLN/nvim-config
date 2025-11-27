@@ -1,6 +1,6 @@
 {
   flake.modules.nixvim.shell =
-    { pkgs, lib, ... }:
+    { lib, pkgs, ... }:
     {
       extraPackages = [ pkgs.shellcheck ];
       lsp.servers.bashls.enable = true;
