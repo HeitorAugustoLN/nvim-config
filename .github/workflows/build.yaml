@@ -9,11 +9,11 @@ run-name: Build for ${{ github.ref_name }} by ${{ github.actor }}
   workflow_dispatch:
 jobs:
   build-packages:
+    timeout-minutes: 29
     name: Build ${{ matrix.package }} on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
-    timeout-minutes: 30
     strategy:
       matrix:
         package:
@@ -48,12 +48,12 @@ jobs:
       - name: Build package
         run: nix build .#${{ matrix.package }} --accept-flake-config
   build-dev-shells:
+    timeout-minutes: 15
     needs: build-packages
     name: Build devShell for ${{ matrix.package }} on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
-    timeout-minutes: 30
     strategy:
       matrix:
         package:
@@ -90,11 +90,11 @@ jobs:
           nix build .#devShells.${{ matrix.system }}.${{ matrix.package }} \
             --accept-flake-config
   build-formatter:
+    timeout-minutes: 14
     name: Build formatter on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
-    timeout-minutes: 30
     strategy:
       matrix:
         system:

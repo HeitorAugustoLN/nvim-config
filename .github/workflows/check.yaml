@@ -9,11 +9,11 @@ run-name: Flake check for ${{ github.ref_name }} by ${{ github.actor }}
   workflow_dispatch:
 jobs:
   check:
+    timeout-minutes: 32
     name: Check flake on ${{ matrix.system }}
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
-    timeout-minutes: 30
     strategy:
       matrix:
         include:
