@@ -1,7 +1,7 @@
 {
-  description = "HeitorAugustoLN's personal Neovim configuration";
+  description = "HeitorAugustoLN's personal Neovim configuration made with Nixvim";
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./flake);
 
   nixConfig = {
     extra-experimental-features = [ "pipe-operators" ];
@@ -10,9 +10,10 @@
   };
 
   inputs = {
+    # keep-sorted start block=yes newline_separated=yes
     flake-compat = {
       type = "github";
-      owner = "edolstra";
+      owner = "NixOS";
       repo = "flake-compat";
     };
 
@@ -21,18 +22,6 @@
       owner = "hercules-ci";
       repo = "flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    gen-luarc = {
-      type = "github";
-      owner = "mrcjkb";
-      repo = "nix-gen-luarc-json";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-      };
     };
 
     git-hooks = {
@@ -52,24 +41,14 @@
       repo = "import-tree";
     };
 
-    mnw = {
-      type = "github";
-      owner = "Gerg-L";
-      repo = "mnw";
-    };
-
     neovim-nightly-overlay = {
       type = "github";
       owner = "nix-community";
       repo = "neovim-nightly-overlay";
 
       inputs = {
-        flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        hercules-ci-effects.follows = "";
         nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
       };
     };
 
@@ -78,6 +57,18 @@
       owner = "NixOS";
       repo = "nixpkgs";
       ref = "nixpkgs-unstable";
+    };
+
+    nixvim = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixvim";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
 
     systems = {
@@ -92,5 +83,6 @@
       repo = "treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # keep-sorted end
   };
 }

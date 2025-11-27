@@ -1,5 +1,0 @@
-require("autocommands")
-require("keymaps")
-require("options")
-require("lz.n").load("plugins")
-vim.cmd("colorscheme catppuccin")
