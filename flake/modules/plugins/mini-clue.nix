@@ -7,13 +7,13 @@
         lazyLoad.settings.event = "DeferredUIEnter";
 
         settings = {
-          clues = [
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.builtin_completion()")
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.g()")
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.marks()")
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.registers()")
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.windows()")
-            (lib.nixvim.mkRaw "require('mini.clue').gen_clues.z()")
+          clues = map (name: lib.nixvim.mkRaw "require('mini.clue').gen_clues.${name}()") [
+            "builtin_completion"
+            "g"
+            "marks"
+            "registers"
+            "windows"
+            "z"
           ];
 
           triggers = [
