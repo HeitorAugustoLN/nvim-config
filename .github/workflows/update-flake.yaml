@@ -29,6 +29,14 @@ jobs:
             dependencies
             nix
           pr-title: "chore(deps): update flake inputs"
+      - name: Close and reopen PR to trigger CI
+        if: steps.update.outputs.pull-request-url != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ steps.update.outputs.pull-request-url }}
+        run: |
+          gh pr close "$PR_URL"
+          gh pr reopen "$PR_URL"
       - name: Enable auto-merge
         if: steps.update.outputs.pull-request-url != ''
         env:
