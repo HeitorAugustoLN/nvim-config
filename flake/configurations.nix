@@ -81,6 +81,7 @@
                 mini-statusline
                 mini-surround
                 oil
+                otter
                 showkeys
                 spider
                 treesitter
