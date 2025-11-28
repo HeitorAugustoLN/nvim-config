@@ -82,7 +82,6 @@
                 oil
                 showkeys
                 spider
-                statuscol
                 treesitter
                 # keep-sorted end
               ];
