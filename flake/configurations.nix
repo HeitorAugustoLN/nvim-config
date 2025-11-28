@@ -69,6 +69,7 @@
                 conform
                 fzf-lua
                 gitsigns
+                guess-indent
                 lint
                 lspconfig
                 luasnip
