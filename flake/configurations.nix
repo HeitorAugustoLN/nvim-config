@@ -99,13 +99,10 @@
         in
         {
           default = self'.nixvimConfigurations.nightly;
-
-          nightly = inputs.nixvim.lib.evalNixvim {
-            modules = modules ++ [ self.modules.nixvim.nightly ];
-            inherit system;
-          };
-
-          stable = inputs.nixvim.lib.evalNixvim { inherit modules system; };
+        }
+        // builtins.mapAttrs (_: modules: inputs.nixvim.lib.evalNixvim { inherit modules system; }) {
+          nightly = modules ++ [ self.modules.nixvim.nightly ];
+          stable = modules;
         };
     };
 }
