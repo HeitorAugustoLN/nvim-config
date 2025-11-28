@@ -36,9 +36,8 @@
     };
 
     import-tree = {
-      type = "github";
-      owner = "vic";
-      repo = "import-tree";
+      type = "git";
+      url = "https://tangled.org/oeiuwq.com/import-tree";
     };
 
     neovim-nightly-overlay = {
