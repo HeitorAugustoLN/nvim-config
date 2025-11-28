@@ -36,7 +36,9 @@
                 file:
                 let
                   json = pkgs.runCommand "converted.json" { nativeBuildInputs = [ pkgs.yj ]; } ''
-                    yj < ${file} > $out
+                    # shellcheck disable=SC2154,SC2188
+                    set -e
+                    yj < ${file} > "$out"
                   '';
                 in
                 lib.importJSON json;

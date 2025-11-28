@@ -24,6 +24,18 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    gen-luarc = {
+      type = "github";
+      owner = "mrcjkb";
+      repo = "nix-gen-luarc-json";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     git-hooks = {
       type = "github";
       owner = "cachix";
