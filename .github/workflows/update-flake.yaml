@@ -20,26 +20,30 @@ jobs:
           persist-credentials: false
       - name: Set up Nix
         uses: cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd  # v31
-      - name: Update flake.lock
-        id: update
-        uses: DeterminateSystems/update-flake-lock@834c491b2ece4de0bbd00d85214bb5e83b4da5c6  # v28
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94  # v2
         with:
-          commit-msg: "chore(deps): update flake inputs"
-          pr-labels: |
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - name: Update flake.lock
+        run: nix flake update --accept-flake-config
+      - name: Create Pull Request
+        id: pull-request
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412  # v7
+        with:
+          branch: update-flake-lock
+          commit-message: "chore(deps): update flake inputs"
+          delete-branch: true
+          labels: |
             dependencies
             nix
-          pr-title: "chore(deps): update flake inputs"
-      - name: Close and reopen PR to trigger CI
-        if: steps.update.outputs.pull-request-url != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ steps.update.outputs.pull-request-url }}
-        run: |
-          gh pr close "$PR_URL"
-          gh pr reopen "$PR_URL"
+          title: "chore(deps): update flake inputs"
+          sign-commits: true
+          token: ${{ steps.app-token.outputs.token }}
       - name: Enable auto-merge
-        if: steps.update.outputs.pull-request-url != ''
+        if: steps.pull-request.outputs.pull-request-number
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ steps.update.outputs.pull-request-url }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ steps.pull-request.outputs.pull-request-url }}
         run: gh pr merge --auto --squash --delete-branch "$PR_URL"
