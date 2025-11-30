@@ -64,4 +64,4 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{ steps.pull-request.outputs.pull-request-url }}
-        run: gh pr merge --auto --rebase --delete-branch "$PR_URL"
+        run: gh pr merge --auto --squash --delete-branch "$PR_URL"
