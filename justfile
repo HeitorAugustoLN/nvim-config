@@ -32,7 +32,7 @@ develop *args:
 # Enter the nix repl in debug mode.
 [group("Develop")]
 repl:
-    NIX_DEBUG_REPL=1 nix repl .
+    NIX_DEBUG_REPL=1 nix repl --expr "builtins.getFlake \"$PWD\""
 
 # Run the nightly neovim configuration.
 [group("Run")]
