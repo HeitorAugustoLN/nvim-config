@@ -74,7 +74,6 @@
       type = "github";
       owner = "nix-community";
       repo = "nixvim";
-      ref = "pull/3993/head"; # TODO: Remove after gets merged.
 
       inputs = {
         flake-parts.follows = "flake-parts";
