@@ -1,5 +1,1 @@
-{
-  flake.modules.nixvim.ripgrep = {
-    dependencies.ripgrep.enable = true;
-  };
-}
+{ flake.modules.nixvim.ripgrep.dependencies.ripgrep.enable = true; }

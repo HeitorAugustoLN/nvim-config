@@ -1,14 +1,12 @@
 {
-  flake.modules.nixvim.showkeys = {
-    plugins.showkeys = {
-      enable = true;
-      lazyLoad.settings.cmd = "ShowkeysToggle";
+  flake.modules.nixvim.showkeys.plugins.showkeys = {
+    enable = true;
+    lazyLoad.settings.cmd = "ShowkeysToggle";
 
-      settings = {
-        maxkeys = 8;
-        position = "bottom-center";
-        winopts.border = "rounded";
-      };
+    settings = {
+      maxkeys = 8;
+      position = "bottom-center";
+      winopts.border = "rounded";
     };
   };
 }

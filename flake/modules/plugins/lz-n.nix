@@ -1,5 +1,1 @@
-{
-  flake.modules.nixvim.lz-n = {
-    plugins.lz-n.enable = true;
-  };
-}
+{ flake.modules.nixvim.lz-n.plugins.lz-n.enable = true; }
