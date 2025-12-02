@@ -6,6 +6,7 @@
 
       plugins = {
         conform-nvim.settings.formatters_by_ft.gdscript = [ "gdformat" ];
+        lint.lintersByFt.gdscript = [ "gdlint" ]; # Linter already installed by conform
 
         dap = {
           adapters.servers.godot = {
@@ -22,8 +23,6 @@
             }
           ];
         };
-
-        lint.lintersByFt.gdscript = [ "gdlint" ]; # Linter already installed by conform
 
         treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
           gdscript

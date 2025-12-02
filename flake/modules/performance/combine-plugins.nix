@@ -1,5 +1,1 @@
-{
-  flake.modules.nixvim.combinePlugins = {
-    performance.combinePlugins.enable = true;
-  };
-}
+{ flake.modules.nixvim.combinePlugins.performance.combinePlugins.enable = true; }
