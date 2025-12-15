@@ -32,7 +32,7 @@ jobs:
           git config user.email "246902415+heitor-bot[bot]@users.noreply.github.com"
       - name: Update flake.lock
         run: |
-          nix flake update --accept-flake-config --commit-lock-file --option commit-lockfile-summary "chore(deps): update flake"
+          nix flake update --accept-flake-config --commit-lock-file
       - name: Get commit message for PR body
         id: pr-body
         run: |
