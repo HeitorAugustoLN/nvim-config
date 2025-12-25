@@ -6,30 +6,34 @@
 
       autoCmd = [
         {
+          event = [
+            "BufLeave"
+            "WinLeave"
+          ];
+
           callback = lib.nixvim.mkRaw ''
             function()
               vim.wo.cursorline = false
             end
           '';
-          desc = "Disable cursorline when leaving window";
-          event = [
-            "BufLeave"
-            "WinLeave"
-          ];
+
           group = "heitor/cursorline_toggle";
+          desc = "Disable cursorline when leaving window";
         }
         {
+          event = [
+            "BufEnter"
+            "WinEnter"
+          ];
+
           callback = lib.nixvim.mkRaw ''
             function()
               vim.wo.cursorline = true
             end
           '';
-          desc = "Enable cursorline when entering window";
-          event = [
-            "BufEnter"
-            "WinEnter"
-          ];
+
           group = "heitor/cursorline_toggle";
+          desc = "Enable cursorline when entering window";
         }
       ];
     };

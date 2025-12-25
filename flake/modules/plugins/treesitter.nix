@@ -4,20 +4,17 @@
     {
       plugins.treesitter = {
         enable = true;
-        folding = true;
 
-        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.parsers; [
           comment
-          diff
           query
           vim
           vimdoc
         ];
 
-        settings = {
-          highlight.enable = true;
-          indent.enable = true;
-        };
+        folding.enable = true;
+        highlight.enable = true;
+        indent.enable = true;
       };
     };
 }

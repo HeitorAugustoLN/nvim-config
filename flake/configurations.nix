@@ -13,7 +13,12 @@
   };
 
   perSystem =
-    { self', system, ... }:
+    {
+      inputs',
+      self',
+      system,
+      ...
+    }:
     {
       nixvimConfigurations =
         let
@@ -39,8 +44,9 @@
                 # keep-sorted end
               ];
 
-              languages = with self.modules.nixvim; [
+              filetypes = with self.modules.nixvim; [
                 # keep-sorted start
+                git
                 godot
                 just
                 lua
@@ -63,27 +69,21 @@
 
               plugins = with self.modules.nixvim; [
                 # keep-sorted start
-                autopairs
                 blink-cmp
-                blink-indent
                 conform
                 fzf-lua
                 gitsigns
-                guess-indent
                 lint
                 lspconfig
-                luasnip
                 lz-n
                 mini-ai
                 mini-clue
+                mini-cmdline
                 mini-icons
-                mini-move
                 mini-statusline
                 mini-surround
                 oil
-                otter
                 showkeys
-                spider
                 treesitter
                 # keep-sorted end
               ];
@@ -92,7 +92,7 @@
               # keep-sorted start
               colorschemes
               core
-              languages
+              filetypes
               performance
               plugins
               # keep-sorted end
@@ -101,9 +101,18 @@
         {
           default = self'.nixvimConfigurations.nightly;
         }
-        // builtins.mapAttrs (_: modules: inputs.nixvim.lib.evalNixvim { inherit modules system; }) {
-          nightly = modules ++ [ self.modules.nixvim.nightly ];
-          stable = modules;
-        };
+        //
+          builtins.mapAttrs
+            (
+              _: modules:
+              inputs.nixvim.lib.evalNixvim {
+                inherit modules system;
+                extraSpecialArgs = { inherit inputs' self'; };
+              }
+            )
+            {
+              nightly = modules ++ [ self.modules.nixvim.nightly ];
+              stable = modules;
+            };
     };
 }

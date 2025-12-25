@@ -6,7 +6,7 @@
 
       plugins = {
         conform-nvim.settings.formatters_by_ft.toml = [ "taplo" ];
-        treesitter.grammarPackages = [ pkgs.vimPlugins.nvim-treesitter.builtGrammars.toml ];
+        treesitter.grammarPackages = [ pkgs.vimPlugins.nvim-treesitter.parsers.toml ];
       };
     };
 }

@@ -24,7 +24,7 @@
           ];
         };
 
-        treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.parsers; [
           gdscript
           gdshader
           godot_resource

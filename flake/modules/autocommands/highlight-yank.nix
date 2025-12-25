@@ -6,14 +6,16 @@
 
       autoCmd = [
         {
+          event = "TextYankPost";
+
           callback = lib.nixvim.mkRaw ''
             function()
               vim.hl.on_yank()
             end
           '';
-          desc = "Highlight when yanking text";
-          event = "TextYankPost";
+
           group = "heitor/highlight_yank";
+          desc = "Highlight when yanking text";
         }
       ];
     };

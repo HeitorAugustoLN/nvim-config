@@ -7,6 +7,7 @@
       breakindent = true;
       confirm = true;
       cursorline = true;
+      cursorlineopt = "number";
       expandtab = true;
 
       fillchars = {
@@ -32,6 +33,8 @@
 
       mouse = "a";
       number = true;
+      pumblend = 10;
+      pumheight = 10;
       relativenumber = true;
       ruler = false;
       scrolloff = 4;
@@ -50,9 +53,9 @@
       tabstop = indentSize;
       termguicolors = true;
       timeoutlen = 400;
+      title = true;
       undofile = true;
       undolevels = 10000;
       updatetime = 200;
-      virtualedit = "block";
     };
 }

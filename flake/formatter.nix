@@ -1,55 +1,36 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 {
   imports = [ inputs.treefmt-nix.flakeModule ];
 
-  perSystem =
-    { pkgs, ... }:
-    {
-      treefmt = {
-        projectRootFile = "flake.nix";
+  perSystem.treefmt = {
+    projectRootFile = "flake.nix";
 
-        programs = {
-          deadnix.enable = true;
-          just.enable = true;
-          keep-sorted.enable = true;
-          nixfmt.enable = true;
+    programs = {
+      just.enable = true;
+      keep-sorted.enable = true;
 
-          prettier = {
-            enable = true;
-            includes = [ "*.md" ];
-          };
-
-          shellcheck.enable = true;
-          shfmt.enable = true;
-          statix.enable = true;
-
-          stylua = {
-            enable = true;
-            settings = lib.importTOML ../.stylua.toml;
-          };
-
-          taplo.enable = true;
-
-          yamlfmt =
-            let
-              importYAML =
-                file:
-                let
-                  json = pkgs.runCommand "converted.json" { nativeBuildInputs = [ pkgs.yj ]; } ''
-                    # shellcheck disable=SC2154,SC2188
-                    set -e
-                    yj < ${file} > "$out"
-                  '';
-                in
-                lib.importJSON json;
-            in
-            {
-              enable = true;
-              settings = importYAML ../.yamlfmt.yaml;
-            };
-        };
-
-        settings.on-unmatched = "info";
+      nixf-diagnose = {
+        enable = true;
+        priority = -1;
       };
+
+      nixfmt.enable = true;
+
+      prettier = {
+        enable = true;
+        includes = [ "*.md" ];
+      };
+
+      shellcheck.enable = true;
+      shfmt.enable = true;
+      stylua.enable = true;
+      taplo.enable = true;
+      yamlfmt.enable = true;
     };
+
+    settings = {
+      formatter.nixf-diagnose.options = [ "--auto-fix" ];
+      on-unmatched = "info";
+    };
+  };
 }

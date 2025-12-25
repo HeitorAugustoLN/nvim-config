@@ -1,13 +1,23 @@
 {
-  flake.modules.nixvim.diagnostic.diagnostic.settings = {
-    virtual_lines = {
-      enable = true;
-      current_line = true;
-    };
+  flake.modules.nixvim.diagnostic =
+    { lib, ... }:
+    {
+      diagnostic.settings = {
+        severity_sort = true;
 
-    virtual_text = {
-      enable = true;
-      current_line = false;
+        signs.text = lib.nixvim.toRawKeys {
+          "vim.diagnostic.severity.ERROR" = "󰅚 ";
+          "vim.diagnostic.severity.HINT" = "󰌶 ";
+          "vim.diagnostic.severity.INFO" = "󰋽 ";
+          "vim.diagnostic.severity.WARN" = "󰀪 ";
+        };
+
+        underline = true;
+
+        virtual_text = {
+          source = "if_many";
+          spacing = 4;
+        };
+      };
     };
-  };
 }

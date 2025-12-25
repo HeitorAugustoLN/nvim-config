@@ -32,18 +32,6 @@
 
       inputs = {
         flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    git-hooks = {
-      type = "github";
-      owner = "cachix";
-      repo = "git-hooks.nix";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -68,7 +56,8 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixpkgs-unstable";
+      # ref = "nixpkgs-unstable";
+      ref = "pull/470883/head";
     };
 
     nixvim = {

@@ -17,7 +17,7 @@
           conform-nvim.settings.formatters_by_ft = lib.genAttrs filetypes (_: [ "shfmt" ]);
           lint.lintersByFt = lib.genAttrs filetypes (_: [ "shellcheck" ]);
 
-          treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.parsers; [
             bash
             zsh
           ];
