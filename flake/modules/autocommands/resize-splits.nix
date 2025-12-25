@@ -6,6 +6,8 @@
 
       autoCmd = [
         {
+          event = "VimResized";
+
           callback = lib.nixvim.mkRaw ''
             function()
               local current_tab = vim.fn.tabpagenr()
@@ -13,9 +15,9 @@
               vim.cmd("tabnext " .. current_tab)
             end
           '';
-          desc = "Resize splits when Vim is resized";
-          event = "VimResized";
+
           group = "heitor/resize_splits";
+          desc = "Resize splits when Vim is resized";
         }
       ];
     };

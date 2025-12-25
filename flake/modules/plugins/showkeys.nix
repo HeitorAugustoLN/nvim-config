@@ -4,7 +4,7 @@
     lazyLoad.settings.cmd = "ShowkeysToggle";
 
     settings = {
-      maxkeys = 8;
+      maxkeys = 5;
       position = "bottom-center";
       winopts.border = "rounded";
     };

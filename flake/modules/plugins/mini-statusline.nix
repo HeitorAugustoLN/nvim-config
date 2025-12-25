@@ -11,6 +11,7 @@
               require("lz.n").trigger_load("${lib.getName config.plugins.mini-icons.package}")
             end
           '';
+
           event = "DeferredUIEnter";
         };
       };

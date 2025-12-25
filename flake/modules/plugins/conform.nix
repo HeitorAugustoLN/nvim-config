@@ -23,11 +23,13 @@
           {
             plugin = lib.getName config.plugins.conform-nvim.package;
             key = "<leader>f";
+
             action = lib.nixvim.mkRaw ''
               function()
                 require("conform").format({ async = true, lsp_format = "fallback" })
               end
             '';
+
             options.desc = "Format buffer";
           }
         ];

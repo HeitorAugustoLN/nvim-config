@@ -6,6 +6,8 @@
 
       autoCmd = [
         {
+          event = "BufWritePre";
+
           callback = lib.nixvim.mkRaw ''
             function(event)
               if event.match:match("^%w%w+:[\\/][\\/]") then
@@ -15,9 +17,9 @@
               vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
             end
           '';
-          desc = "Auto create directory when saving a file";
-          event = "BufWritePre";
+
           group = "heitor/auto_create_dir";
+          desc = "Auto create directory when saving a file";
         }
       ];
     };

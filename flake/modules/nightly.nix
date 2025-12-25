@@ -1,8 +1,7 @@
-{ inputs, ... }:
 {
   flake.modules.nixvim.nightly =
-    { pkgs, ... }:
+    { inputs', ... }:
     {
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
+      package = inputs'.neovim-nightly-overlay.packages.neovim;
     };
 }

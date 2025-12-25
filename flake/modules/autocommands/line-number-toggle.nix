@@ -6,6 +6,14 @@
 
       autoCmd = [
         {
+          event = [
+            "BufLeave"
+            "CmdlineEnter"
+            "FocusLost"
+            "InsertEnter"
+            "WinLeave"
+          ];
+
           callback = lib.nixvim.mkRaw ''
             function(args)
               if vim.wo.number then
@@ -20,25 +28,11 @@
               end
             end
           '';
-          desc = "Switch to absolute line numbers when in insert mode or unfocused";
-          event = [
-            "BufLeave"
-            "CmdlineEnter"
-            "FocusLost"
-            "InsertEnter"
-            "WinLeave"
-          ];
+
           group = "heitor/line_number_toggle";
+          desc = "Switch to absolute line numbers when in insert mode or unfocused";
         }
         {
-          callback = lib.nixvim.mkRaw ''
-            function()
-              if vim.wo.number and not vim.startswith(vim.api.nvim_get_mode().mode, "i") then
-                vim.wo.relativenumber = true
-              end
-            end
-          '';
-          desc = "Switch to relative line numbers when in normal mode and focused";
           event = [
             "BufEnter"
             "CmdlineLeave"
@@ -46,7 +40,17 @@
             "InsertLeave"
             "WinEnter"
           ];
+
+          callback = lib.nixvim.mkRaw ''
+            function()
+              if vim.wo.number and not vim.startswith(vim.api.nvim_get_mode().mode, "i") then
+                vim.wo.relativenumber = true
+              end
+            end
+          '';
+
           group = "heitor/line_number_toggle";
+          desc = "Switch to relative line numbers when in normal mode and focused";
         }
       ];
     };

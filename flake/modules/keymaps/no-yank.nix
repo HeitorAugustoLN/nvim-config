@@ -5,6 +5,7 @@
         "n"
         "v"
       ];
+
       key = "<A-d>";
       action = ''"_d'';
       options.desc = "Delete without yanking";
@@ -14,6 +15,7 @@
         "n"
         "v"
       ];
+
       key = "<A-c>";
       action = ''"_c'';
       options.desc = "Change without yanking";
@@ -23,6 +25,7 @@
         "n"
         "v"
       ];
+
       key = "<A-D>";
       action = ''"_D'';
       options.desc = "Delete to end of line without yanking";
@@ -32,6 +35,7 @@
         "n"
         "v"
       ];
+
       key = "<A-C>";
       action = ''"_C'';
       options.desc = "Change to end of line without yanking";
