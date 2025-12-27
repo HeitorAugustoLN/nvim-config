@@ -25,17 +25,6 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    gen-luarc = {
-      type = "github";
-      owner = "mrcjkb";
-      repo = "nix-gen-luarc-json";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     import-tree = {
       type = "git";
       url = "https://tangled.org/oeiuwq.com/import-tree";
