@@ -14,7 +14,10 @@
         priority = -1;
       };
 
-      nixfmt.enable = true;
+      nixfmt = {
+        enable = true;
+        strict = true;
+      };
 
       prettier = {
         enable = true;
