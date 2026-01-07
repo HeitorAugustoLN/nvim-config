@@ -45,8 +45,7 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      # ref = "nixpkgs-unstable";
-      ref = "pull/470883/head";
+      ref = "nixpkgs-unstable";
     };
 
     nixvim = {
