@@ -8,6 +8,7 @@
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.parsers; [
           comment
           query
+          regex
           vim
           vimdoc
         ];
