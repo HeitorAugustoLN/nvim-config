@@ -31,6 +31,24 @@
             )
             [
               {
+                key = "<leader>scl";
+                action = lib.nixvim.mkRaw ''
+                  function()
+                    require("fzf-lua").files({ cwd = vim.env.NIXVIM_BUILT_CONFIG, follow = true })
+                  end
+                '';
+                options.desc = "Search built Lua config";
+              }
+              {
+                key = "<leader>scn";
+                action = lib.nixvim.mkRaw ''
+                  function()
+                    require("fzf-lua").files({ cwd = vim.env.NIXVIM_CONFIG })
+                  end
+                '';
+                options.desc = "Search Nixvim source files";
+              }
+              {
                 key = "<leader>sf";
                 action = "<cmd>FzfLua files<CR>";
                 options.desc = "Search files";
@@ -47,6 +65,11 @@
             mode = "n";
             keys = "<leader>s";
             desc = "+search";
+          }
+          {
+            mode = "n";
+            keys = "<leader>sc";
+            desc = "+config";
           }
         ];
       };
