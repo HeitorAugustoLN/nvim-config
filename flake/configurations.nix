@@ -29,6 +29,7 @@
                 autoCommands
                 clipboard
                 diagnostic
+                env
                 keymaps
                 lsp
                 luaLoader
