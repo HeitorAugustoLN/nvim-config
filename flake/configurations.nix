@@ -27,6 +27,7 @@
               core = with self.modules.nixvim; [
                 # keep-sorted start
                 autoCommands
+                builtConfig
                 clipboard
                 diagnostic
                 env

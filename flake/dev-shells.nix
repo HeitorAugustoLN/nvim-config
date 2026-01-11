@@ -10,7 +10,7 @@
             pkgs.just
           ];
 
-          env.NIXVIM_INIT_SOURCE = nixvim.config.build.initSource;
+          inherit (nixvim.config) env;
         }
       ) config.nixvimConfigurations;
     };
