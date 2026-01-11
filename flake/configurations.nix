@@ -53,9 +53,11 @@
                 markdown
                 nix
                 python
+                query
                 shell
                 toml
                 typst
+                vim
                 yaml
                 # keep-sorted end
               ];
