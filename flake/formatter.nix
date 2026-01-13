@@ -31,9 +31,6 @@
       yamlfmt.enable = true;
     };
 
-    settings = {
-      formatter.nixf-diagnose.options = [ "--auto-fix" ];
-      on-unmatched = "info";
-    };
+    settings.on-unmatched = "info";
   };
 }
