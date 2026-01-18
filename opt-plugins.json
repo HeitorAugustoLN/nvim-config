@@ -1,0 +1,83 @@
+{
+  "pins": {
+    "catppuccin": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "catppuccin",
+        "repo": "nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "beaf41a30c26fd7d6c386d383155cbd65dd554cd",
+      "url": "https://github.com/catppuccin/nvim/archive/beaf41a30c26fd7d6c386d383155cbd65dd554cd.tar.gz",
+      "hash": "sha256-cZ6VeF69s0eQ9I7Tz8MoEKuF9w+TbA94vXj2EuDoSgU="
+    },
+    "conform.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "stevearc",
+        "repo": "conform.nvim"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "c2526f1cde528a66e086ab1668e996d162c75f4f",
+      "url": "https://github.com/stevearc/conform.nvim/archive/c2526f1cde528a66e086ab1668e996d162c75f4f.tar.gz",
+      "hash": "sha256-M2mGNF8iARiQ6MzIFSSE/2BRDSj1+XEP/C44dwg8MQ8="
+    },
+    "mini.ai": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-mini",
+        "repo": "mini.ai"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "9eae720f2b20f6ad28cbfa0ddc524e10dc2c3201",
+      "url": "https://github.com/nvim-mini/mini.ai/archive/9eae720f2b20f6ad28cbfa0ddc524e10dc2c3201.tar.gz",
+      "hash": "sha256-Ehib6aeth855q4DKgdVxDXZ+Cgp0qFBa5Nr7E0LogcU="
+    },
+    "mini.icons": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-mini",
+        "repo": "mini.icons"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "efc85e42262cd0c9e1fdbf806c25cb0be6de115c",
+      "url": "https://github.com/nvim-mini/mini.icons/archive/efc85e42262cd0c9e1fdbf806c25cb0be6de115c.tar.gz",
+      "hash": "sha256-qxUA0Rq1wMqb/Vti+2D5BVEZEwttYH4+h/+pvV2pagE="
+    },
+    "mini.surround": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-mini",
+        "repo": "mini.surround"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "f9358544ed06bc10197e698b7fc8dc5963be3f4b",
+      "url": "https://github.com/nvim-mini/mini.surround/archive/f9358544ed06bc10197e698b7fc8dc5963be3f4b.tar.gz",
+      "hash": "sha256-GvUHOPoyE8p12fmfuvnUOEvxhuqF7bmPM2PPdyeoiWk="
+    },
+    "oil.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "stevearc",
+        "repo": "oil.nvim"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "f55b25e493a7df76371cfadd0ded5004cb9cd48a",
+      "url": "https://github.com/stevearc/oil.nvim/archive/f55b25e493a7df76371cfadd0ded5004cb9cd48a.tar.gz",
+      "hash": "sha256-eMruZSMi72A74LqtSsyJSI3WY595aKO9n2XxJ3Du/9Y="
+    }
+  },
+  "version": 7
+}
