@@ -78,7 +78,9 @@
                 };
               };
 
-              optAttrs = npinsToPlugins ../opt-plugins.json;
+              optAttrs = npinsToPlugins ../opt-plugins.json // {
+                "blink.cmp" = pkgs.vimPlugins.blink-cmp;
+              };
 
               start =
                 let
@@ -132,7 +134,7 @@
                 ]);
 
               startAttrs = npinsToPlugins ../start-plugins.json // {
-                inherit (pkgs.vimPlugins) nvim-treesitter;
+                inherit (pkgs.vimPlugins) nvim-treesitter rainbow-delimiters-nvim;
               };
             };
 

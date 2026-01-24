@@ -32,10 +32,12 @@
     };
 
     mnw = {
-      type = "github";
-      owner = "Gerg-L";
-      repo = "mnw";
-      ref = "pull/47/head";
+      # type = "github";
+      # owner = "Gerg-L";
+      # repo = "mnw";
+      # ref = "pull/47/head";
+      type = "path";
+      path = "/home/heitor/Projects/mnw";
     };
 
     neovim-nightly-overlay = {

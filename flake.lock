@@ -52,18 +52,14 @@
     },
     "mnw": {
       "locked": {
-        "lastModified": 1768606701,
-        "narHash": "sha256-qIHxw1FSaYsC8m3d2iFegsQEZVal0dxJDybUOTOQpP8=",
-        "owner": "Gerg-L",
-        "repo": "mnw",
-        "rev": "763173bb1adb15c17d5d008189d8dcf710e627ee",
-        "type": "github"
+        "lastModified": 1769089816,
+        "narHash": "sha256-bFV6Kb9vgvfPghSfjVOQ5PJCqEVIYorCqOGxHLMXX4E=",
+        "path": "/home/heitor/Projects/mnw",
+        "type": "path"
       },
       "original": {
-        "owner": "Gerg-L",
-        "ref": "pull/47/head",
-        "repo": "mnw",
-        "type": "github"
+        "path": "/home/heitor/Projects/mnw",
+        "type": "path"
       }
     },
     "neovim-nightly-overlay": {
