@@ -1,0 +1,5 @@
+require("tree-sitter").setup_buffer()
+vim.lsp.enable("nixd")
+vim.schedule(function()
+  vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+end)

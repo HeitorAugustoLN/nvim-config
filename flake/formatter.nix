@@ -11,6 +11,7 @@
 
       nixf-diagnose = {
         enable = true;
+        excludes = [ "flake/npinsToPlugins.nix" ]; # We do not want to modify it besides exporting a function
         priority = -1;
       };
 
