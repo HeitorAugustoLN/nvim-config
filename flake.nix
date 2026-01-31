@@ -31,6 +31,12 @@
       repo = "import-tree";
     };
 
+    mnw = {
+      type = "github";
+      owner = "Gerg-L";
+      repo = "mnw";
+    };
+
     neovim-nightly-overlay = {
       type = "github";
       owner = "nix-community";
@@ -47,18 +53,6 @@
       owner = "NixOS";
       repo = "nixpkgs";
       ref = "nixpkgs-unstable";
-    };
-
-    nixvim = {
-      type = "github";
-      owner = "nix-community";
-      repo = "nixvim";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
     };
 
     systems = {
